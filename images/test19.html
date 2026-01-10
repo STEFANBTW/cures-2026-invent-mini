@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Cards with Total Price</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            gap: 30px; /* Space between cards */
+        }
+
+        /* --- Card Container --- */
+        .summary-card {
+            background-color: white;
+            width: 280px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative; /* CRITICAL: Allows absolute positioning of the badge */
+            padding: 25px;
+            transition: transform 0.2s;
+            overflow: hidden; /* Ensures badge doesn't spill out */
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- 1. The Corner Badge (Free Shipping Only) --- */
+        .free-shipping-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #27ae60; /* Green */
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom-left-radius: 12px;
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- Content Layout --- */
+        .card-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product-image-placeholder {
+            width: 100%;
+            height: 120px;
+            background-color: #eee;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        /* --- 2. The Price Section (The Logic) --- */
+        .price-section {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* The Big Sum (Base + Shipping) */
+        .total-sum {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2c3e50;
+            line-height: 1;
+        }
+
+        /* The Small Breakdown */
+        .price-breakdown {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* Button Styling */
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .buy-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>

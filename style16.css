@@ -1,0 +1,2709 @@
+
+/* Backup of style16.css as of January 9, 2026 */
+
+:root {
+	/* --- CORE THEME COLORS --- */
+	--color-brown-darkest: #2D1C16;
+	--color-brown-surface: #4B362A;
+	--color-chocolate: #7B3F00;
+	--color-orange-action: #FF8C00;
+	--color-silver: #C0C0C0;
+	--color-alice-blue: #F0F8FF;
+
+	/* --- SUPPORTING COLORS --- */
+	--color-cream: #FFFDD0;
+	--color-teal-patina: #008080;
+	--color-burgundy: #800020;
+	--color-copper: #B87333;
+
+	/* --- FUNCTIONAL VARIABLES --- */
+	--nav-height: 70px;
+	--transition-speed: 0.35s;
+
+	/* --- SUMMARY GRID COLORS (Test 12 Adaptation) --- */
+	--summ-bg: var(--color-cream);
+	--summ-card-bg: #ffffff;
+	--summ-text: #1e293b;
+	--summ-dim: #414750;
+	--jumia-orange: #f97316;
+	--ali-gold: #fdda9d;
+	--essential-red: #991b1b;
+	--essential-bg: #fee2e2;
+
+	/* --- FONT SCALING --- */
+	--font-scale: 1;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--color-brown-darkest);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: var(--color-alice-blue);
+}
+
+body.large-font {
+	--font-scale: 1.15; /* 15% larger text */
+}
+
+.tool-bag,
+.hidden-hidden-summary-grid,
+.summary-tool-pics {
+    overflow: auto;
+    /* Ensures scrolling is enabled if content overflows */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and older Edge */
+}
+
+.tool-bag::-webkit-scrollbar,
+.summary-grid::-webkit-scrollbar,
+.summary-tool-pics::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera, new Edge */
+}
+
+/* =========================================
+           1. IMAGE SLIDER STYLES (NEW)
+           ========================================= */
+/* Fix for Image Sliders */
+.slider-frame {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+/* Main Card Images: 1 per view */
+.tool-card .slider-track img, .summary-card .slider-track img, .tool-bag-tdescr .slider-track img {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* =========================================
+    1. NAVBAR (Dynamic Scroll)
+    ========================================= */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: #2d1c16c9;
+    border-bottom: 2px solid var(--color-orange-action);
+    z-index: 1000;
+    transition: transform 0.4s ease-in-out;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+/* Class added via JS to hide nav */
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-content {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: calc(29px * var(--font-scale, 1));
+    font-weight: 800;
+    color: var(--color-orange-action);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    padding: 20px;
+}
+
+.nav-links a,
+.dropbtn {
+    color: var(--color-alice-blue);
+    text-decoration: none;
+    font-size: calc(18px * var(--font-scale, 1));
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover,
+.dropbtn:hover {
+    color: var(--color-orange-action);
+}
+
+/* Dropdown Styles */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-cream);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1;
+    top: 50px;
+    /* Offset from text */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    border: 1px solid var(--color-copper);
+}
+
+.dropdown-content a {
+    color: var(--color-brown-darkest);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: calc(15px * var(--font-scale, 1));
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--color-orange-action);
+    color: white;
+}
+
+.nav-dropdown:hover .dropdown-content,
+.dropdown-content.show {
+    display: block;
+    animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* =========================================
+    2. LANDING SECTION
+    ========================================= */
+.landing-page {
+    min-height: 130dvh;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    text-align: center;
+    padding-top: var(--nav-height);
+    
+}
+
+.landing-grid0 {
+    height: 88dvh;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-header h1 {
+    max-width: 1000px;
+    border: 2px solid var(--color-orange-action);
+    padding: 30px 100px;
+    border-radius: 20px;
+    color: var(--color-copper);
+    font-size: clamp(calc(32px * var(--font-scale, 1)), 5vw + 16px, calc(56px * var(--font-scale, 1))); /* Fluid typography */
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 1rem;
+}
+
+.landing-message p {
+    max-width: 850px;
+    color: var(--color-silver);
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.6;
+}
+
+.landing-message p:nth-child(1) {
+    margin: 15px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-orange-action);
+}
+
+.landing-message p:nth-child(2) {
+    margin: 15px auto;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-copper);
+}
+
+.landing-message p:nth-child(3) {
+    margin: 80px auto 30px;
+    color: var(--color-alice-blue);
+    text-align: center;
+}
+
+.tool-bag-link {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.tools-connect {
+    padding: 12px 30px;
+    background: var(--color-brown-surface);
+    border: 2px solid var(--color-copper);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.tools-connect a {
+    color: var(--color-alice-blue);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: calc(18px * var(--font-scale, 1));
+}
+
+.tools-connect:hover {
+    /* background: var(--color-orange-action); */
+    transform: translateY(-5px);
+    border: 2px solid var(--color-orange-action);
+    color: var(--color-brown-darkest);
+    box-shadow: 0 0 50px 1px #ff8c0050;
+}
+
+.tools-connect:hover a {
+    color: var(--color-orange-action);
+    text-shadow: 0 0 50px #ffc57edd;
+}
+
+/* =========================================
+    3. PROSPECTS (TOOL BAG)
+    ========================================= */
+.tool-bag-container {
+    position: relative;
+    height: 220dvh;
+    display: flex;
+    align-items: start;
+
+    z-index: 5;
+
+    background-color: var(--color-brown-darkest);
+}
+
+.tool-bag-nav {
+    position: absolute;
+    top: 25%;
+    left: 1.5%;
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+
+    height: 23rem;
+    width: 50px;
+
+    border-radius: 1rem;
+
+    transition: .3s linear;
+
+    z-index: 1;
+    
+    /* Ensure click events work for expansion logic */
+    cursor: pointer;
+}
+
+.tool-bag-nav:hover {
+    width: 250px;
+}
+/* Active state for mobile tap logic */
+.tool-bag-nav.active {
+    width: 250px;
+}
+
+.tool-bag-nav-main{
+    height: 70%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: start; */
+    align-items: start;
+
+    background-color: color-mix(in srgb, var(--color-brown-surface), transparent 60%);
+    border-radius: 1rem;
+    backdrop-filter: blur(15px);
+
+    transition: .3s linear;
+
+    overflow: hidden;
+}
+.tool-bag-nav-button{
+    height: 18%;
+    width: 100%;
+
+    border-radius: 1rem;
+    border: none;
+
+    display: grid;
+    grid-template-columns: 10% 70%;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.2em;
+    background-color: color-mix(in srgb, var(--color-brown-surface), transparent 60%);
+    backdrop-filter: blur(15px);
+
+    transition: .3s linear;
+
+    overflow: hidden;
+}
+.tool-bag-nav-main:hover,
+.tool-bag-nav.active .tool-bag-nav-main,
+.tool-bag-nav-button:hover {
+    box-shadow: 0 0 50px 1px #ff8c0050;
+    border: 1px solid var(--color-orange-action);
+}
+.tool-bag-nav-main:hover a {
+    padding: 0 1.5rem;
+}
+
+.tool-bag-nav-main:hover a,
+.tool-bag-nav.active .tool-bag-nav-main a,
+.tool-bag-nav-button:hover button {
+    width: 100%;
+}
+
+.tool-bag-nav-button button{
+    height: 100%;
+    width: auto;
+
+    font-size: 1em;
+    text-decoration: none;
+    color: antiquewhite;
+
+    white-space: nowrap;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    transition: .3s linear;
+}
+
+.tool-bag-nav a{
+    height: 25%;
+    width: auto;
+    padding: 0 .8rem;
+
+    display: grid;
+    grid-template-columns: 10% 70%;
+    align-items: center;
+
+    font-size: 1.2em;
+    text-decoration: none;
+
+    /* filter: brightness(0); */
+
+    transition: .3s linear;
+
+}
+.tool-bag-nav a:hover {
+    background-color: rgba(0, 0, 0, 0.307);
+    filter: brightness(125%) saturate(110%);
+}
+
+.link-descr {
+    padding-left: 1.7rem;
+    padding-right: 4.6rem;
+
+    text-decoration: none;
+    color: antiquewhite;
+
+    transition: .3s linear;
+}
+
+.tool-bag-nav a:hover .link-descr,
+#currency-toggle-btn2:hover .link-descr {
+    color: var(--color-orange-action);
+    text-shadow: 0 0 30px #f7be79da;
+}
+
+.tool-bag {
+    position: relative;
+
+    height: 100dvh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 20rem;
+
+    overflow: auto;
+}
+
+
+.tools-group {
+    position: sticky;
+    left: calc(var(--index)*2.5rem);
+
+    height: 90%;
+    width: 93%;
+
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    background-color: var(--color-brown-surface);
+    border-radius: 30px;
+    overflow: hidden;
+    /* Contains the slide-in panel */
+    border: 1px solid #ffffff10;
+    
+    scroll-margin-top: 5vh;
+    /* Centers the section in viewport */
+    scroll-margin-left: -90rem;
+}
+
+.tools-group:nth-child(1) {
+    margin-left: 45%;
+    --index: 1;
+}
+
+.tools-group:nth-child(2) {
+    --index: 2;
+}
+
+.tools-group:nth-child(3) {
+    --index: 3;
+}
+
+/* Card Fade In Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Summary Card Entrance Animations */
+@keyframes summaryCardSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header Brief inside Group */
+.tool-bag-brief-container {
+    padding: 15px 30px 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+    border-bottom: 1px solid var(--color-copper);
+}
+
+.tool-bag-brief h1 {
+    font-size: calc(40px * var(--font-scale, 1));
+    color: var(--color-orange-action);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.tool-bag-brief p {
+    color: var(--color-silver);
+    font-size: calc(18px * var(--font-scale, 1));
+    max-width: 1000px;
+}
+
+.tool-bag-inst {
+    font-size: calc(14.5px * var(--font-scale, 1));
+    color: var(--color-cream);
+    font-style: italic;
+}
+
+.tool-bag-brief {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.tool-bag-brief-price {
+    text-align: right;
+    min-width: 200px;
+}
+
+.tool-bag-brief-price p {
+    margin: 5px 0;
+    font-size: calc(14.5px * var(--font-scale, 1));
+}
+
+.tool-bag-brief-price #learning-total-plus,
+.tool-bag-brief-price #repair-total-plus,
+.tool-bag-brief-price #productivity-total-plus {
+    font-size: calc(40px * var(--font-scale, 1));
+    color: var(--color-orange-action);
+}
+
+.tool-bag-brief-price #learning-total-price,
+.tool-bag-brief-price #learning-total-shipping,
+.tool-bag-brief-price #repair-total-price,
+.tool-bag-brief-price #repair-total-shipping,
+.tool-bag-brief-price #productivity-total-price,
+.tool-bag-brief-price #productivity-total-shipping {
+    font-size: calc(18px * var(--font-scale, 1));
+    color: var(--color-orange-action);
+}
+
+/* Grid for Cards inside Group */
+.tool-bag-grid-container {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    /* Critical for slide-in */
+}
+
+.tool-bag-grid {
+    height: 87%;
+    width: 55%;
+    padding: 50px 20px;
+    margin: auto auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    overflow-y: auto;
+    transition: width 0.4s ease;
+
+    /* Modern Scrollbar Styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-copper) rgba(0, 0, 0, 0.1);
+}
+
+.tool-bag-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tool-bag-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 15px 0; /* Spacing from top/bottom edges */
+}
+
+.tool-bag-grid::-webkit-scrollbar-thumb {
+    background-color: var(--color-copper);
+    border-radius: 10px;
+}
+
+.tool-bag-grid::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-orange-action);
+}
+
+/* Wrapper to hold grid space */
+.tool-card-wrapper {
+    height: 290px; /* Matches original card height */
+    position: relative;
+    z-index: 1;
+}
+
+.tool-card-wrapper:hover {
+    z-index: 100;
+}
+
+/* Prospect Card Styles */
+.tool-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Initially fill wrapper */
+    background-color: var(--color-alice-blue);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: padding 0.5s ease, padding-bottom 0.3s ease, transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    color: var(--color-brown-darkest);
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Expand card on hover without affecting grid */
+.tool-card-wrapper:hover .tool-card {
+    padding-bottom: 30px; /* 270px + 40px for button */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    transform: scale(1.5);
+}
+/* .tool-card-wrapper:hover {
+    transform: scale(1.02);
+} */
+
+.tool-pics-container {
+    height: 80%;
+    overflow: hidden;
+}
+.tool-pics-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.tool-card-body {
+    height: 20%;
+    padding: 0 10px 2px;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    overflow: hidden;
+}
+
+.tool-name {
+    font-size: calc(16px * var(--font-scale, 1));
+    margin: 6px 0 3px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tool-meta-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.282);
+}
+.tool-meta-row .card-category,
+.tool-meta-row .essential-badge {
+    font-size: calc(11px * var(--font-scale, 1)) ;
+    padding: 5px 6px;
+}
+
+.tool-store {
+    font-size: calc(12px * var(--font-scale, 1));
+    color: var(--color-teal-patina);
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tool-price {
+    font-size: calc(calc(15.5px * var(--font-scale, 1)) + .2vw);
+    color: var(--color-chocolate);
+    margin: 5px 0;/* Reduced margin as requested */
+}
+
+.go-to-page {
+    position: absolute;
+    bottom: -40px;
+    /* Hidden initially */
+    left: 0;
+    width: 100%;
+    background: var(--color-silver);
+    color: var(--color-brown-surface);
+    text-align: center;
+    padding: 6px 0;
+    transition: bottom 0.3s;
+    font-size: calc(14.5px * var(--font-scale, 1));
+    font-weight: bold;
+    text-decoration: none;
+    
+    transition: .3s linear;
+}
+.go-to-page:hover{
+    border-top: 2px solid var(--color-orange-action);
+    color: var(--color-alice-blue);
+    background-color: var(--color-brown-surface);
+}
+
+.tool-card-wrapper:hover .go-to-page {
+    bottom: 0;
+}
+
+/* --- SLIDE-IN DETAIL PANEL (Prospects Only) --- */
+.tool-bag-tdescr {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: rgba(45, 28, 22, 0.87);
+    backdrop-filter: blur(10px);
+    border-left: 3px solid var(--color-orange-action);
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.25);
+    transform: translateX(100%);
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 10;
+    padding: 10px 20px;
+    overflow-y: auto;
+    color: var(--color-alice-blue);
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-bag-tdescr.is-visible {
+    transform: translateX(0);
+}
+
+.panel-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-silver);
+}
+.panel-subheader {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+}
+
+.panel-name {
+    font-size: calc(calc(14.5px * var(--font-scale, 1)) + .5vw);
+    color: var(--color-orange-action);
+    margin: 0;
+}
+
+.panel-store-prefix {
+    font-size: calc(calc(11px * var(--font-scale, 1)) + .1vw);
+    color: var(--color-silver);
+    text-transform: uppercase;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    align-self: start;
+    margin: 0;
+}
+
+.panel-price {
+    text-align: right;
+    font-size: calc(calc(21px * var(--font-scale, 1)) + .5vw);
+    color: var(--color-cream);
+    font-weight: bold;
+    line-height: 25px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: end;
+}
+
+.panel-price small {
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--color-silver);
+    font-weight: lighter;
+    margin: 0 10px;
+}
+
+.panel-slider {
+    height: 55%;
+    min-height: 150px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative; /* For absolute positioning of controls */
+    flex-shrink: 0;
+}
+
+.papnel-meta-row {
+    position: absolute;
+    bottom: 7px;
+
+    width: inherit;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--color-brown-surface);
+}
+
+/* Magnification effect for panel images */
+.tool-bag-tdescr .slider-track img {
+    transition: transform 0.4s ease;
+    cursor: zoom-in;
+}
+
+.tool-bag-tdescr .slider-track img:hover {
+    transform: scale(1.5);
+}
+
+.panel-details h3 {
+    color: var(--color-orange-action);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.detail-link {
+    margin-top: auto;
+    background-color: var(--color-orange-action);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: calc(16px * var(--font-scale, 1));
+    align-self: flex-start;
+}
+
+.detail-section-title {
+    color: var(--color-teal-patina);
+    text-transform: uppercase;
+    font-size: calc(14.5px * var(--font-scale, 1));
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.detail-specs-list {
+    padding-left: 20px;
+    color: var(--color-silver);
+}
+
+.detail-specs-list li {
+    margin-bottom: 5px;
+}
+
+.close-panel-hint {
+    margin-top: auto;
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--color-text-dim);
+    text-align: center;
+    padding-top: 20px;
+    font-style: italic;
+}
+
+/* --- Slider Controls (Panel) --- */
+.panel-meta-row {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.panel-meta-row .card-category,
+.panel-meta-row .rank-badge,
+.panel-meta-row .essential-badge{
+    font-size: calc(16px * var(--font-scale, 1)); /* Increased font size */
+    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.9); /* Matching background */
+    color: black; /* Black text for both */
+    border-radius: 4px;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+.panel-meta-row .essential-badge {
+    background-color: var(--essential-bg);
+}
+
+.panel-meta-row .card-category {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.panel-meta-row .essential-badge {
+    pointer-events: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.slider-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    pointer-events: none; /* Allow clicks to pass through the container area */
+    z-index: 5;
+}
+
+.slider-btn {
+    background: rgba(45, 28, 22, 0.6);
+    color: var(--color-orange-action);
+    border: 1px solid var(--color-orange-action);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    pointer-events: auto; /* Re-enable clicks for buttons */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(19px * var(--font-scale, 1));
+    padding-bottom: 3px; /* Visual alignment for arrows */
+}
+
+.slider-btn:hover {
+    background: var(--color-orange-action);
+    color: var(--color-brown-darkest);
+    transform: scale(1.1);
+}
+
+.panel-visit-btn:hover {
+    background-color: var(--color-cream) !important;
+    color: var(--color-brown-darkest) !important;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+    5. REFACTORED STYLES (from inline)
+   ========================================= */
+
+/* --- index.html --- */
+#font-toggle-btn {
+    cursor: pointer;
+}
+
+.highlight-text {
+    color: brown;
+    font-weight: bolder;
+}
+
+.download-btn-container {
+    display: flex;
+}
+
+/* --- Prospect Cards --- */
+.tool-meta-row.productivity-essential {
+    margin: 0 -5px;
+}
+
+.badge-rank-number {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    padding: 0 6.5px;
+    font-size: 1.2em;
+    margin-left: 4px;
+}
+
+/* --- Detail Panel --- */
+.panel-badge-rank {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    padding: 0 5px;
+    font-size: 0.8em;
+    margin-left: 4px;
+}
+
+.panel-rank-info {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: calc(14px * var(--font-scale, 1));
+}
+
+.panel-rank-label {
+    background-color: var(--essential-bg);
+    color: var(--essential-red);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.panel-rank-category {
+    color: var(--color-alice-blue);
+    font-weight: 600;
+}
+
+.panel-rank-circle {
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.panel-source-row {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ffffff30;
+    display: flex;
+    align-items: center;
+}
+
+.panel-source-label {
+    color: var(--color-silver);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.panel-source-name {
+    color: var(--color-orange-action);
+    font-weight: bold;
+}
+
+.panel-visit-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--color-orange-action);
+    color: var(--color-brown-darkest);
+    padding: 12px 0;
+    margin-top: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+/* --- Summary Cards --- */
+/* .summary-card .free-ship-tag {
+    margin-bottom: 5px;
+    font-size: calc(20px * var(--font-scale, 1));
+} */
+
+.shipping-info-container {
+    text-align: right;
+}
+
+.shipping-label {
+    font-size: calc(11px * var(--font-scale, 1));
+    text-transform: uppercase;
+    color: var(--summ-dim);
+}
+
+.summary-card .shipping-info {
+    font-size: calc(15px * var(--font-scale, 1));
+}
+
+.card-quantity {
+    font-size: 0.8rem;
+    color: var(--summ-dim);
+    margin-bottom: 5px;
+}
+
+.summary-card .final-price-row {
+    align-items: flex-end;
+}
+
+.total-price-label {
+    font-size: calc(11px * var(--font-scale, 1));
+    text-transform: uppercase;
+    color: var(--summ-dim);
+}
+
+/* --- Deal Badges (General) --- */
+.deal-badge {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.deal-badge-img {
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* =========================================
+    4. SUMMARY SECTION (Test 12 Styling)
+    ========================================= */
+.summary-page {
+    background-color: var(--summ-card-bg);
+    color: var(--summ-text);
+    position: relative;
+    padding-top: 33rem;
+    min-height: 100dvh;
+
+    /* Masking for drip effect using the image */
+    -webkit-mask-image: url(images/SVG/SVG/7x/retry-mask@7x.png), linear-gradient(black, black); 
+    mask-image: url(images/SVG/SVG/7x/retry-mask@7x.png), linear-gradient(black, black);
+    -webkit-mask-size: 120%, 100%; 
+    mask-size: 90%;
+    -webkit-mask-position: top, top;
+    mask-position: 90% 0;
+    -webkit-mask-repeat: repeat-x;  
+    mask-repeat: repeat-x;
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+
+    /* Inset shadow for depth */
+    box-shadow: inset 0 20px 30px -10px rgba(45, 28, 22, 0.5);
+
+    /* Outline the cut-out shape */
+    filter: drop-shadow(0 -3px 0 var(--color-orange-action));
+}
+
+.summary-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.summary-header h1 {
+    color: var(--color-brown-darkest);
+    font-size: calc(40px * var(--font-scale, 1));
+    margin: 0;
+}
+
+.summary-header p {
+    color: var(--color-brown-darkest);
+    font-size: calc(19px * var(--font-scale, 1));
+    border-bottom: 1px solid var(--color-brown-surface);
+    padding-bottom: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.grand-total-box {
+    background: var(--color-brown-surface);
+    color: white;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: calc(24px * var(--font-scale, 1));
+    font-weight: bold;
+}
+
+/* Controls */
+.summary-grid-utility-container {
+    padding: 1rem;
+    margin-bottom: 30px;
+
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 70px; /* Default when nav is visible */
+    /* Or var(--header-height) if you have a main navbar */
+        z-index: 150;
+        backdrop-filter: blur(10px);
+    /* border-bottom: 1px solid #cbd5e1; */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease-in-out;
+    scroll-margin-top: 80px;
+}
+
+.utility-bar {
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.sticky-price-container {
+    position: sticky;
+    top: 20%;
+    left: 0;
+
+    width: 9rem;
+    padding: 1.1rem;
+    padding-bottom: 6rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    border-radius: 0 10px 10px 0;
+    background-color: rgba(255, 233, 185, 0.301);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--color-brown-surface);
+    border-left: none;
+}
+
+/* The Dynamic Total inside the sticky bar (Initially hidden) */
+.sticky-grandtotal-price {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    /* Hidden initially, JS will toggle this */
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.sticky-total-container {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    /* Hidden initially, JS will toggle this */
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.sticky-label {
+    font-size: calc(12px * var(--font-scale, 1));
+    color: var(--secondary);
+    text-transform: uppercase;
+}
+
+.sticky-price {
+    font-size: calc(19px * var(--font-scale, 1));
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.filter-button {
+    padding: 8px 16px;
+    border: 2px solid var(--color-brown-surface);
+    border-radius: 50px;
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-brown-surface);
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.filter-button:hover,
+.filter-button.active,
+.sort-select:hover {
+    background-color: var(--color-chocolate);
+    border-color: var(--color-orange-action);
+    color: var(--color-cream);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+}
+
+.sort-select {
+    padding: 8px 16px;
+    padding-right: 30px; /* Space for arrow */
+    border-radius: 20px;
+    border: 2px solid var(--color-brown-surface);
+    background: none;
+    color: var(--color-brown-darkest);
+    transition: 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232D1C16%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    cursor: pointer;
+}
+
+.sort-ops {
+    background-color: none;
+    color: var(--color-brown-darkest);
+    border-radius: 10px;
+}
+
+/* Summary Grid */
+.container {
+    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px 80px 20px;
+    scroll-margin-top: 170px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 40px;
+    padding-bottom: 50px;
+    position: relative;
+
+    scroll-margin-top: 0;
+    scroll-snap-type: mandatory;
+}
+
+.summary-card-wrapper {
+    height: 350px;
+    position: relative;
+    z-index: 1;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(40px) scale(0.95); /* Starting position: down and slightly small */
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* The "Elastic" easing */
+}
+
+/* The class JS will add to trigger the view */
+.summary-card-wrapper.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.summary-card-wrapper:hover {
+    z-index: 100;
+}
+
+.summary-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--summ-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); */
+    display: flex;
+    flex-direction: column;
+    color: var(--color-alice-blue);
+    transition: padding-bottom 0.3s ease, transform 0.3s, box-shadow 0.3s;
+    /* border: 1px solid var(--color-cream); */
+    /* max-width: 250px; Removed to let wrapper dictate width */
+}
+
+.summary-card-wrapper:hover .summary-card {
+    padding-bottom: 35px; /* Expand height on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Modern Swipe Hint --- */
+.swipe-hint-container {
+    position: absolute;
+    top: -45px; /* Adjusted to sit cleanly above cards */
+    right: 20px; /* Aligned with right edge */
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.swipe-hint-container h3 {
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--color-orange-action);
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    opacity: 0.9;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.swipe-instruction {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px; /* Tighter gap for a cleaner arrow shape */
+}
+
+.arrow {
+    display: inline-block; /* CRITICAL: Allows transform to work on text */
+    font-weight: bold;
+    font-size: calc(20px * var(--font-scale, 1));
+    color: var(--color-silver);
+    opacity: 0; /* Start hidden */
+    animation: swipeNudge 2s infinite ease-out;
+}
+.arrow.a1 { animation-delay: 0s; }
+.arrow.a2 { animation-delay: 0.2s; }
+.arrow.a3 { animation-delay: 0.4s; }
+
+/* The "Ghosting" Nudge Animation */
+@keyframes swipeNudge {
+    0% {
+        opacity: 0;
+        transform: translateX(0) scale(0.8);
+    }
+    15% {
+        opacity: 1; /* Fade in quick */
+        color: var(--color-orange-action); /* Light up */
+        transform: translateX(2px) scale(1);
+    }
+    50% {
+        /* Hold visibility briefly while moving */
+        opacity: 1;
+        color: var(--color-silver);
+    }
+    100% {
+        opacity: 0; /* Fade out */
+        transform: translateX(12px) scale(0.9); /* Move right to indicate direction */
+    }
+}
+
+.summary-card.essential:hover {
+    box-shadow: 0 0 50px 30px var(--essential-red);
+    border: 2px solid var(--essential-red);
+}
+
+.card-image {
+    height: 100%;
+    background-color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(48px * var(--font-scale, 1));
+    position: relative;
+    border-radius: 12px;
+
+    overflow: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.card-body {
+    padding: .2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-row {
+    position: absolute;
+    bottom: 7px;
+
+    width: inherit;
+
+    display: flex;
+    align-items: center;
+
+    background-color: var(--summ-card-bg);
+    border-radius: 6px 6px;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+}
+
+.card-inner-body {
+    margin: 5px 5px;
+    flex-shrink: 0;
+}
+
+.card-category {
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--color-brown-darkest);
+    text-transform: uppercase;
+    height: 100%;
+    margin: auto 0;
+    padding: 0 10px;
+}
+
+.essential-badge {
+    background: var(--essential-bg);
+    color: var(--essential-red);
+    font-size: calc(13px * var(--font-scale, 1));
+    padding: 2px 10px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.rank-badge {
+    background-color: var(--color-alice-blue);
+    color: var(--color-brown-darkest);
+    font-size: calc(11px * var(--font-scale, 1));
+    height: 100%;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prod-tools .tool-meta-row {
+    margin: 0 -10px;
+    width: auto;
+}
+
+/* #prod-tools .essential-badge {
+    background-color: var(--color-alice-blue);
+    color: var(--color-brown-darkest);
+    font-size: calc(11px * var(--font-scale, 1));
+    height: 100%;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.summary-card .rank-badge {
+    background-color: var(--color-alice-blue);
+    color: var(--color-brown-darkest);
+    font-size: calc(13px * var(--font-scale, 1));
+    padding: 3px 8px;
+    margin: 0;
+    white-space: nowrap;
+    display: inline-block;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.095);
+}
+
+.card-title {
+    font-size: calc(16px * var(--font-scale, 1));
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--summ-text);
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.source-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    margin: 5px;
+
+    width: inherit;
+
+    font-size: calc(13.5px * var(--font-scale, 1));
+    color: var(--color-burgundy);
+    font-weight: bold;
+}
+
+/* Deal Badges */
+.deal-badge {
+    display: inline-block;
+    padding: .2rem .3rem;
+    border-radius: 4px;
+    font-size: calc(11.5px * var(--font-scale, 1));
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.deal-choice {
+    background: var(--ali-gold);
+    color: black;
+    font-weight: 600;
+}
+
+.deal-express {
+    background: var(--jumia-orange);
+}
+
+.deal-super {
+    background: var(--essential-red);
+}
+
+.deal-official {
+    background: black;
+}
+
+.deal-badge-img {
+    height: 18px;
+    width: auto;
+    vertical-align: middle;
+    margin-left: 5px;
+    border-radius: 3px;
+}
+
+.card-footer {
+    margin-top: auto;
+    padding-top: 5px;
+    border-top: 1px dashed var(--summ-dim);
+    transition: all 0.4s ease;
+    z-index: 5;
+}
+
+.price-breakdown {
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--summ-dim);
+    margin-bottom: 4px;
+    font-family: monospace;
+}
+
+.final-price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.final-price {
+    font-size: calc(20px * var(--font-scale, 1));
+    font-weight: 800;
+    color: var(--summ-text);
+}
+
+.shipping-info {
+    color: var(--color-brown-darkest);
+    font-weight: 600;
+    font-size: calc(15px * var(--font-scale, 1));
+}
+
+.free-ship-tag {
+    font-size: calc(15px * var(--font-scale, 1));
+    color: #16a34a;
+    font-weight: 700;
+    background: #dcfce7;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.sum-deets {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    /* Hidden initially */
+    left: -2.5%;
+    width: 105%;
+    background: var(--color-alice-blue);
+    border: none;
+    color: var(--color-burgundy);
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 0;
+    transition: bottom 0.3s ease-out, display 0.3s ease-out;
+    font-size: calc(14.5px * var(--font-scale, 1));
+    font-weight: bold;
+}
+
+.summary-card-wrapper:hover .sum-deets {
+    display: block;
+    bottom: 0; /* Slide into the newly expanded space */
+}
+
+
+/* =========================================
+    5. CLOSING
+    ========================================= */
+.closing {
+    height: 135dvh;
+    display: flex;
+    align-items: end;
+    text-align: center;
+    background-color: var(--summ-card-bg);
+}
+
+.closing-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.closing-message {
+    height: 82%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 12%;
+}
+
+.closing-message h1 {
+    width: 70%;
+    font-size: calc(64px * var(--font-scale, 1));
+    color: var(--color-brown-darkest);
+}
+
+.closing-message p {
+    width: 60%;
+    font-size: calc(21px * var(--font-scale, 1));
+    color: var(--color-brown-darkest);
+}
+
+.closing-summary-download {
+    color: var(--color-alice-blue);
+    background: var(--color-brown-darkest);
+    padding: 1.2rem;
+    height: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-btn {
+    background: var(--color-orange-action);
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.download-btn h1 {
+    margin: 0;
+    font-size: calc(16px * var(--font-scale, 1));
+    color: var(--color-brown-darkest);
+}
+
+.download-btn:hover {
+    background: var(--color-cream);
+}
+
+/* Styles for new search and currency controls */
+.summary-controls-container {
+    display: flex;
+    align-items: center;
+}
+
+#search-bar {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--color-brown-surface);
+    background: none;
+    color: var(--color-brown-darkest);
+    font-size: calc(14.5px * var(--font-scale, 1));
+    width: 250px;
+    transition: all 0.3s;
+}
+
+#search-bar:focus {
+    outline: none;
+    border-color: var(--color-orange-action);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+    color: var(--color-cream);
+    background-color: #7B3F00;
+}
+
+#currency-toggle-btn {
+    position: fixed;
+    top: 36%;
+    left: 0;
+    /* Uses .filter-button styles from HTML */
+    white-space: nowrap;
+    /* Prevents text wrapping */
+
+    padding-left: 20px;
+    padding-block: .8rem;
+    border-left: none;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+
+    font-size: calc(16px * var(--font-scale, 1));
+
+    z-index: 1;
+}
+
+/* --- Utility Bar Desktop Defaults (New Layout Support) --- */
+.utility-top-row {
+    display: flex;
+    width: 100%;
+    gap: 10px; /* Add spacing between utility items */
+    justify-content: space-between;
+    align-items: flex-start; /* Align top to handle wrapping gracefully */
+    margin-bottom: 0;
+    position: relative; /* For search overlay */
+}
+.filter-hamburger-btn, 
+.utility-mobile-bottom,
+#search-icon-btn {
+    display: none;
+}
+
+.panel-close-btn {
+    display: none; /* Hidden by default on desktop */
+}
+
+/* =========================================
+    MOVED STYLES (Fix for Minification Cascade)
+   ========================================= */
+
+/* 1. Reset the wrapper to be invisible initially */
+.summary-card-wrapper {
+    height: 350px;
+    position: relative;
+    z-index: 1;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(40px) scale(0.95); /* Starting position: down and slightly small */
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* The "Elastic" easing */
+}
+
+/* 2. The class JS will add to trigger the view */
+.summary-card-wrapper.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* 3. Keep hover effects separate */
+.summary-card-wrapper:hover {
+    z-index: 100;
+}
+.summary-card-wrapper:hover .summary-card {
+    padding-bottom: 35px;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Modern Swipe Hint --- */
+.swipe-hint-container {
+    position: absolute;
+    top: -45px; /* Adjusted to sit cleanly above cards */
+    right: 20px; /* Aligned with right edge */
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.swipe-hint-container h3 {
+    font-size: calc(13px * var(--font-scale, 1));
+    color: var(--color-orange-action);
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    opacity: 0.9;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.swipe-instruction {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px; /* Tighter gap for a cleaner arrow shape */
+}
+
+.arrow {
+    display: inline-block; /* CRITICAL: Allows transform to work on text */
+    font-weight: 800;
+    font-size: calc(20px * var(--font-scale, 1));
+    color: var(--color-silver);
+    opacity: 0; /* Start hidden */
+    animation: swipeNudge 2s infinite ease-out;
+}
+
+/* The "Ghosting" Nudge Animation */
+@keyframes swipeNudge {
+    0% {
+        opacity: 0;
+        transform: translateX(0) scale(0.8);
+    }
+    15% {
+        opacity: 1; /* Fade in quick */
+        color: var(--color-orange-action); /* Light up */
+        transform: translateX(2px) scale(1);
+    }
+    50% {
+        /* Hold visibility briefly while moving */
+        opacity: 1;
+        color: var(--color-silver);
+    }
+    100% {
+        opacity: 0; /* Fade out */
+        transform: translateX(12px) scale(0.9); /* Move right to indicate direction */
+    }
+}
+
+/* Staggered delays create the "wave" motion */
+.arrow.a1 { animation-delay: 0s; }
+.arrow.a2 { animation-delay: 0.2s; }
+.arrow.a3 { animation-delay: 0.4s; }
+
+/* =========================================
+    6. RESPONSIVE MEDIA QUERIES
+   ========================================= */
+@media screen and (max-width: 1200px) {
+
+    /* --- Tool Bag (Horizontal Scroll) --- */
+    .tool-bag-container {
+        height: 200dvh;
+    }
+    
+    .tool-bag-nav { 
+        top: 35%;
+    }
+
+    .tool-bag-grid {
+        width: 55%;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Smaller cards for mobile */
+        padding: 0 10px;
+    }
+    
+    .tool-bag-brief {
+        display:flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 0 10px;
+    }
+
+    .tool-bag-brief h1 {
+        font-size: calc(24px * var(--font-scale, 1));
+        padding: 1vh 0;
+        
+    }
+    .tool-bag-brief p {
+        font-size: calc(15px * var(--font-scale, 1));
+        margin: 0px 0;
+        text-align: justify;
+    }
+    .tool-bag-inst {
+        font-size: calc(13px * var(--font-scale, 1));
+    }
+    .tool-bag-brief-price {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: last baseline;
+        min-width: 200px;
+        width: 100%;
+    }
+    .tool-bag .brief-totel-price p{
+        margin: 0;
+        font-size: calc(11px * var(--font-scale, 1)) !important;
+    }
+    .brief-price-calc {
+        display: flex;
+        flex-direction: column;
+    }
+    .new-pow {
+        display: block;
+    }
+    .tool-bag .brief-price-calc p{
+        font-size: calc(11px * var(--font-scale, 1)) !important;
+        margin: 0;
+    }
+    .tool-bag-brief-price #learning-total-plus,
+    .tool-bag-brief-price #repair-total-plus,
+    .tool-bag-brief-price #productivity-total-plus {
+        font-size: calc(24px * var(--font-scale, 1));
+    }
+
+    .tool-bag-brief-price #learning-total-price,
+    .tool-bag-brief-price #learning-total-shipping,
+    .tool-bag-brief-price #repair-total-price,
+    .tool-bag-brief-price #repair-total-shipping,
+    .tool-bag-brief-price #productivity-total-price,
+    .tool-bag-brief-price #productivity-total-shipping {
+        font-size: calc(13px * var(--font-scale, 1));
+    }
+    .tool-card-wrapper {
+        height: 225px; /* Matches original card height */
+    }
+    .tool-card-wrapper:hover .tool-card {
+        padding: 2px 2px 25px;
+    }
+    .tool-pics-container {
+        height: 55%;
+        overflow: hidden;
+    }
+
+    /* --- Side Panel (Detail View) --- */
+    .tool-bag-tdescr {
+        width: 50%; /* Full width on mobile */
+    }
+    .panel-price {
+        margin: 0 0 10px;
+    }
+
+    /* --- Summary Section --- */
+    .summary-header h1 {
+        font-size: calc(40px * var(--font-scale, 1)) !important;
+    }
+    .summary-header p {
+        font-size: calc(16px * var(--font-scale, 1)) !important;
+    }
+    
+    .summary-grid-utility-container {
+        padding: 0;
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 0;
+    }
+    .utility-bar {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    /* Line 1: Search | Filter Ham | Sort */
+    .utility-top-row {
+        width: 95%;
+        margin: 0 auto;
+        padding: 5px 5px 10px;
+        justify-content: space-between;
+    }
+
+    .summary-controls-container {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    
+    #search-icon-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: calc(19px * var(--font-scale, 1));
+        cursor: pointer;
+        padding: 1px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: center;
+    }
+
+    #search-icon-btn.hide-anim {
+        transform: scale(0);
+        width: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+    }
+
+    #search-bar {
+        width: 0;
+        padding: 0;
+        border: none;
+        opacity: 0;
+        transition: all 0.3s ease;
+        font-size: calc(13px * var(--font-scale, 1));
+    }
+    #search-bar.expanded {
+        position: absolute; /* Overlay behavior */
+        left: 0;
+        width: 50%; /* Occupy half width as requested */
+        max-width: 300px;
+        padding: 6px 12px;
+        border: 1px solid var(--color-orange-action);
+        background-color: var(--color-brown-surface);
+        color: var(--color-alice-blue);
+        z-index: 20; /* Overlay filters */
+        opacity: 1;
+    }
+
+    .filter-hamburger-btn {
+        display: flex; /* Show hamburger on tablet/mobile */
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border: 1px solid var(--color-brown-surface);
+        border-radius: 50px;
+        background: transparent;
+        color: var(--color-brown-surface);
+        font-weight: 600;
+        font-size: calc(11px * var(--font-scale, 1));
+        cursor: pointer;
+        white-space: nowrap;
+    }
+    /* Hide default text to replace with responsive text */
+    .filter-hamburger-btn .btn-text {
+        display: none;
+    }
+    /* Tablet Label */
+    .filter-hamburger-btn::after {
+        content: 'More Filters';
+    }
+
+    .summary-filter-container {
+        /* Tablet State: Show partial list */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+        width: auto;
+        transition: all 0.3s ease;
+    }
+
+    /* Hide filters after the 4th one when not expanded */
+    .summary-filter-container:not(.show) .filter-button:nth-child(n+5) {
+        display: none;
+    }
+
+    /* Expanded State (Tablet & Mobile) */
+    .summary-filter-container.show {
+        width: 100%; /* Force new line */
+        order: 10;   /* Move to bottom */
+        margin-top: 10px;
+        border-top: 1px dashed var(--color-silver);
+        padding-top: 10px;
+    }
+    
+    /* When expanded, ensure parent wraps */
+    .utility-top-row.filters-expanded {
+        flex-wrap: wrap;
+    }
+
+    /* Tablet specific: Ensure controls don't wrap prematurely */
+    .summary-controls-container, .sort-div, .filter-hamburger-btn {
+        flex-shrink: 0;
+    }
+    .summary-filter-container {
+        flex-shrink: 1; /* Allow filters to shrink/wrap */
+    }
+
+    .filter-button {
+        padding: 4px 10px;
+        border: 1px solid var(--color-brown-surface);
+        border-radius: 50px;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-brown-surface);
+        font-weight: 600;
+        font-size: calc(11px * var(--font-scale, 1));
+        transition: 0.3s;
+    }
+    
+    .sort-select {
+        padding: 6px 12px;
+        font-weight: 600;
+        font-size: calc(11px * var(--font-scale, 1));
+    border: 1px solid var(--color-brown-surface);
+    }
+
+    /* Line 2: Total | Currency */
+    .utility-mobile-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        padding: 7px;
+        margin: 3px auto 0;
+        border-top: 1px solid var(--color-silver);
+    }
+    .mobile-price-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        padding: 2px;
+    }
+    .mobile-total-display {
+        font-size: calc(14.5px * var(--font-scale, 1));
+        font-weight: 200;
+        color: var(--color-brown-darkest);
+    }
+    .mobile-dynamic-display {
+        font-size: calc(18px * var(--font-scale, 1));
+        font-weight: 700;
+        color: var(--color-chocolate);
+    }
+    
+    .sticky-price-container {
+        display: none; /* Hide sticky sidebar on mobile */
+    }
+    #currency-toggle-btn {
+        display: none;
+    }
+    /* Hide desktop hamburger if screen is wide enough (override for safety) */
+    #mobile-currency-btn {
+        padding: 8px 14px;
+    }
+    
+    .container {
+        padding: 7px;
+    }
+
+    /* --- Close Button for Mobile Panel --- */
+    .panel-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        background-color: rgba(45, 28, 22, 0.8);
+        border: 1px solid var(--color-orange-action);
+        color: var(--color-orange-action);
+        border-radius: 50%;
+        font-size: calc(24px * var(--font-scale, 1));
+        cursor: pointer;
+        z-index: 100;
+        padding-bottom: 4px; /* Visual alignment for &times; */
+    }
+    
+    /* --- Summary Card Adjustments for Mobile --- */
+    .card-inner-body {
+        margin: 2px;
+    }
+    .summary-card .card-title {
+        font-size: calc(13px * var(--font-scale, 1));
+        line-height: 1.2;
+        margin-bottom: 0.2rem;
+    }
+    .card-category {
+        font-size: calc(10.5px * var(--font-scale, 1));
+        padding: 4px 7px !important;
+    }
+    .summary-card .essential-badge {
+        font-size: calc(10.5px * var(--font-scale, 1));
+        padding: 3px 5px 5.5px;
+    }
+    .rank-badge {
+        font-size: calc(10px * var(--font-scale, 1));
+        padding: 5px;
+    }
+    .source-tag {
+        font-size: calc(10px * var(--font-scale, 1));
+        margin: 2px;
+    }
+    .price-breakdown {
+        font-size: calc(11px * var(--font-scale, 1));
+    }
+    .final-price-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+    .final-price {
+        font-size: calc(17px * var(--font-scale, 1)) !important;
+    }
+    .sum-deets {
+        font-size: calc(12px * var(--font-scale, 1));
+        padding: 5px 0;
+    }
+    .summary-card .shipping-info {
+        font-size: calc(12px * var(--font-scale, 1));
+    }
+    .summary-card .free-ship-tag {
+        font-size: calc(12px * var(--font-scale, 1));
+        padding: 3px 4px;
+        margin: 0;
+    }
+    /* Override inline styles for labels */
+    .final-price-row > div > div {
+        font-size: calc(9px * var(--font-scale, 1)) !important;
+    }
+    .card-inner-body > div:nth-child(2) { /* Quantity label */
+        font-size: calc(10.5px * var(--font-scale, 1)) !important;
+    }
+
+    /* --- Summary Section --- */
+    .summary-page {
+        padding-top: calc(10rem + 10vw + 5vh); 
+    }
+    .summary-header h1 {
+        font-size: calc(29px * var(--font-scale, 1));
+    }
+    
+    /* Hide hamburger on desktop explicitly if needed, but media query handles it */
+    /* Above 1200px styles are default, so we need to ensure hamburger is hidden there */
+    
+
+    /* --- Closing Section Mobile --- */
+    .closing-message h1 {
+        font-size: calc(32px * var(--font-scale, 1));
+        width: 90%;
+    }
+    .closing-message p {
+        font-size: calc(16px * var(--font-scale, 1));
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .filter-hamburger-btn {
+        display: none;
+    }
+}
+@media screen and (max-width: 740px) {
+        /* --- Navbar --- */
+    .main-nav {
+        height: auto;
+    background-color: color-mix(in srgb, var(--color-brown-surface), transparent 95%);
+    }
+    .nav-content {
+        gap: 10px;
+        padding-top: 10px;
+        flex-direction: column;
+    }
+    .nav-logo {
+        padding: 10px;
+    }
+    .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    background-color: color-mix(in srgb, var(--color-brown-surface), transparent 85%);
+        padding: 10px;
+        width: 100%;
+    }
+    .nav-links a{
+        font-size: calc(14.5px * var(--font-scale, 1));
+    }
+    
+    .dropdown-content {
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    background-color: color-mix(in srgb, var(--color-brown-surface), transparent 35%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    top: 40px;
+        min-width: auto;
+    border: 1px solid var(--color-orange-action);
+    }
+
+    .dropdown-content a {
+        color: var(--color-alice-blue);
+        padding: 12px 16px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: var(--color-orange-action);
+        color: white;
+    }
+
+    /* --- Landing Page --- */
+    .landing-grid0 {
+        padding-top: 5rem;
+    }
+    .landing-header h1 {
+        font-size: calc(32px * var(--font-scale, 1));
+        padding: 20px;
+        letter-spacing: 2px;
+    }
+    .landing-message p {
+        font-size: calc(17px * var(--font-scale, 1));
+    }
+    .tool-bag-link {
+        align-items: center;
+        gap: 10px;
+    }
+    .tools-connect {
+        padding: 10px 20px;
+        
+        & a{
+            font-size: calc(16px * var(--font-scale, 1));
+            font-weight: 400;
+        }
+    }
+    
+    /* --- Tool Bag (Horizontal Scroll) --- */    
+    .tool-bag-nav {
+        height: 20rem;
+        width: 40px;
+        gap: 10px;
+        left: 15px;
+    }
+    .tool-bag-nav:hover {
+        width: 195px;
+    }
+    .tool-bag-nav.active {
+        width: 195px;
+    }
+
+    .tool-bag-nav a{
+        font-size: calc(16px * var(--font-scale, 1));
+        padding: 0 0.7rem;
+    }
+    .tool-bag-nav-button {
+        font-size: calc(16px * var(--font-scale, 1));
+    }
+    .tool-bag-nav-main:hover a {
+        padding: 0 1.5rem;
+    }
+    .link-descr {
+        padding-left: 1.1rem;
+        padding-right: 1rem;
+    }
+    
+    .tool-bag {
+        align-items: start;
+        height: 150dvh;
+    }
+    .tools-group {
+        width: 96vw; /* Groups take up almost full width */
+        left: 1.5vw !important; /* Reset sticky offset */
+        margin-left: 10px !important; /* Reset initial margin */
+        border-radius: 15px;
+        scroll-margin-top: 5vh;
+        /* Centers the section in viewport */
+        scroll-margin-left: 0;
+        height: 140dvh;
+    }
+    
+    /* Reset the specific first-child margin that pushes it to the middle */
+    .tools-group:nth-child(1) {
+        margin-left: 10px !important;
+    }
+    .tool-bag-brief-container {
+        padding: 0 10px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+        border-bottom: 2px solid var(--color-copper);
+    } 
+    .tool-bag-brief {
+        display:flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .tool-bag-brief h1 {
+        font-size: calc(calc(16px * var(--font-scale, 1)) + 3vw);
+        padding-top: 2vh;
+    }
+    .tool-bag-brief p {
+        font-size: calc(14.5px * var(--font-scale, 1));
+        margin: 0 0 10px;
+        text-align: justify;
+    }
+    .tool-bag-inst {
+        font-size: calc(11px * var(--font-scale, 1));
+    }
+    .tool-bag .brief-totel-price p{
+        margin: 0;
+    }
+    .brief-price-calc {
+        display: flex;
+        flex-direction: column;
+    }
+    .new-pow {
+        display: block;
+    }
+    .tool-bag .brief-price-calc p{
+        font-size: calc(calc(6.5px * var(--font-scale, 1)) + 1vw) !important;
+        margin: 0;
+    }
+    .tool-bag-brief-price #learning-total-plus,
+    .tool-bag-brief-price #repair-total-plus,
+    .tool-bag-brief-price #productivity-total-plus {
+        font-size: calc(calc(16px * var(--font-scale, 1)) + 3vw);
+    }
+
+    .tool-bag-brief-price #learning-total-price,
+    .tool-bag-brief-price #learning-total-shipping,
+    .tool-bag-brief-price #repair-total-price,
+    .tool-bag-brief-price #repair-total-shipping,
+    .tool-bag-brief-price #productivity-total-price,
+    .tool-bag-brief-price #productivity-total-shipping {
+        font-size: calc(calc(6.5px * var(--font-scale, 1)) + 1.8vw);
+    }
+    .tool-bag-grid {
+        height: 95%;
+        width: min(100%, 800px);
+        gap: 6px;
+    }
+    .tool-card-wrapper:hover .tool-card {
+        padding: 0;
+    }
+    .tool-card-body {
+        height: 45%;
+        padding: 0 5px;
+    }
+        /* --- Card Adjustments for Mobile --- */
+    .tool-name {
+       font-size: calc(calc(10.5px * var(--font-scale, 1)) + .5vw);
+        margin: 4px 0 2px;
+    }
+    .tool-store {
+        font-size: calc(8.8px * var(--font-scale, 1));
+    }
+    .tool-price {
+        font-size: calc(16px * var(--font-scale, 1));
+        margin: 2px 0 25px !important; /* Space for the always-visible button */
+    }
+    .go-to-page {
+        bottom: 0;
+        padding: 3px 0;
+    }
+    .tool-meta-row .card-category {
+        font-size: calc(9px * var(--font-scale, 1));
+        padding: auto 10px !important;
+    }
+    .tool-meta-row .essential-badge {
+        font-size: calc(9px * var(--font-scale, 1));
+        padding: 5px;
+    }
+    .tool-meta-row .rank-badge {
+        font-size: calc(9px * var(--font-scale, 1));
+        padding: 5px 15px;
+    }
+    .card-title {
+        font-size: calc(13.5px * var(--font-scale, 1));
+    }
+    .final-price {
+        font-size: calc(18px * var(--font-scale, 1));
+    }
+     .tool-meta-row {
+        margin: 0;
+        overflow: hidden;
+    }
+    #prod-tools .tool-meta-row {
+        margin: 0 -5px;
+    }
+    .tool-bag-brief h1 {
+        cursor: pointer;
+        text-decoration: none;
+        text-decoration-color: var(--color-orange-action);
+        transition: 0.3s linear;
+    }
+    .tool-bag-brief h1:hover {
+        color: lightgoldenrodyellow;
+    }
+
+    /* --- Side Panel (Detail View) --- */
+    .tool-bag-tdescr {
+        width: 90%; /* Full width on mobile */
+        position: fixed; /* Fixed over the viewport */
+        top: 0;
+        height: 100dvh;
+        right: 0;
+        height: 100vh;
+        z-index: 2000;
+        padding: 10px 7.5px ;
+    }
+
+    /* --- Mobile Panel Header Text Reduction --- */
+    .panel-name {
+        font-size: calc(calc(16px * var(--font-scale, 1)) + 1.3vw);
+        text-align: justify;
+        width: 90%;
+        align-self: start;
+    }
+    .panel-store-prefix {
+        font-size: calc(12px * var(--font-scale, 1));
+    }
+    .panel-price {
+        font-size: calc(calc(23px * var(--font-scale, 1)) + 1vw);
+        margin: 10px 5px;
+    }
+    .panel-price small {
+        font-size: calc(11px * var(--font-scale, 1));
+    }
+    .panel-meta-row .card-category,
+    .panel-meta-row .rank-badge {
+        font-size: calc(12px * var(--font-scale, 1)); /* Increased font size */
+        padding: 6px 10px;
+        background-color: rgba(255, 255, 255, 0.9); /* Matching background */
+        color: black; /* Black text for both */
+        border-radius: 4px;
+        pointer-events: auto;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    /* --- Mobile Specific Filter Logic (<= 740px) --- */
+    .filter-hamburger-btn::after {
+        content: 'Filters'; /* Change label for mobile */
+    }
+    
+    .summary-filter-container {
+        display: none; /* Hide all initially on mobile */
+    }
+
+    @keyframes filterFadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .summary-filter-container.show {
+        display: flex; /* Show all when expanded */
+        animation: filterFadeInDown 0.9s ease-out forwards;
+    }
+    
+    #search-bar.expanded {
+        position: static; /* Take up space in the flex row */
+        width: auto;
+        flex-grow: 1; /* Allow it to take available space */
+        max-width: none;
+        background-color: transparent;
+        color: var(--color-brown-darkest);
+        z-index: auto;
+    }
+
+    .summary-card-wrapper {
+        height: 270px;
+        position: relative;
+        z-index: 1;
+    }    
+    .summary-card-wrapper:hover .summary-card {
+        padding-bottom: 0; /* Expand height on hover */
+        transform: translateY(0);
+        box-shadow: none;
+    }
+    .summary-card-wrapper:hover .sum-deets {
+        display: none;
+        bottom: 0; /* Slide into the newly expanded space */
+    }
+
+    /* Mobile Click Hover State */
+     .summary-card-wrapper:hover .summary-card.mobile-hover-state {
+        padding-bottom: 35px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        transform: translateY(-10px);
+        bottom: 0;
+    }
+    .summary-card.essential:hover {
+        box-shadow: none;
+        border: none;
+    }
+     .summary-card-wrapper:hover .summary-card.mobile-hover-state .sum-deets {
+        display: block;
+        bottom: 0; /* Slide into the newly expanded space */
+    }
+
+    .summary-card.essential.mobile-hover-state:hover {
+        box-shadow: 0 0 25px 10px var(--essential-red);
+        border: 2px solid var(--essential-red);
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); /* Fits 320px screens better */
+        gap: 7px;
+        padding-bottom: 50px;
+        position: relative;
+    }
+
+    .container {
+        scroll-margin-top: 200px;
+    }
+}  

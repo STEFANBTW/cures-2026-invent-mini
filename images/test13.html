@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store with Instant Receipts</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --dim-text: #94a3b8;
+            --accent-red: #ef4444;
+            --jumia-orange: #f97316;
+            --ali-gold: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        /* --- Top Navigation --- */
+        .top-nav {
+            background-color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .total-price-box {
+            background: var(--text);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        button.filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        button.filter-btn:hover {
+            background: #f1f5f9;
+            border-color: var(--secondary);
+        }
+
+        button.filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        select.sort-select {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            background-color: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        /* --- Product Grid --- */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f1f5f9;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 140px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        /* Deal Tag Logic */
+        .deal-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .deal-choice { background: var(--ali-gold); color: black; }
+        .deal-express { background: var(--jumia-orange); }
+        .deal-super { background: var(--accent-red); }
+        .deal-official { background: #0f172a; }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .source-tag {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .essential-badge {
+            display: inline-block;
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .price-breakdown {
+            font-size: 0.8rem;
+            color: var(--dim-text);
+            margin-bottom: 4px;
+            font-family: monospace;
+        }
+
+        .final-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .final-price-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .final-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .free-ship-tag {
+            font-size: 0.75rem;
+            color: #16a34a;
+            font-weight: 700;
+            background: #dcfce7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        /* --- NEW: Download Button Style --- */
+        .download-btn {
+            width: 100%;
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            color: var(--secondary);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            background-color: var(--bg);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="total-price-box">
+            Est. Total: $<span id="total-price">0.00</span>
+        </div>
+
+        <div class="controls-container">
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+                <button class="filter-btn" onclick="filterProducts('Learning')">Learning</button>
+                <button class="filter-btn" onclick="filterProducts('Repair')">Repair</button>
+                <button class="filter-btn" onclick="filterProducts('Productivity')">Productivity</button>
+                <button class="filter-btn" onclick="filterProducts('AliExpress')">AliExpress</button>
+                <button class="filter-btn" onclick="filterProducts('Jumia')">Jumia</button>
+                <button class="filter-btn" onclick="filterProducts('essential')">Essentials</button>
+                <button class="filter-btn" onclick="filterProducts('freeShipping')">Free Shipping</button>
+            </div>
+
+            <div style="border-left: 1px solid #cbd5e1; height: 30px; margin: 0 10px;"></div>
+
+            <select class="sort-select" id="sort-select" onchange="sortProducts()">
+                <option value="default">Sort By</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="essential">Most Essential</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3 style="margin-bottom: 20px; color: var(--secondary);">Showing <span id="count">50</span> products</h3>
+        <div class="product-grid" id="product-grid">
+            </div>
+    </div>
+
+    <script>
+        // --- 1. Data Generation ---
+        const categories = ['Learning', 'Repair', 'Productivity'];
+        const sources = ['AliExpress', 'Jumia'];
+        const aliTags = ['Choice', 'SuperDeals', 'None', 'None']; 
+        const jumiaTags = ['Jumia Express', 'Official Store', 'None', 'None'];
+
+        const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+        const productNames = [
+            "Digital Multimeter", "Soldering Iron Kit", "Python Coding Book", "Ergonomic Mouse", "Mechanical Keyboard",
+            "Precision Screwdrivers", "Noise Cancelling Headphones", "Webcam 1080p", "Desk Lamp LED", "Notebook Set",
+            "Arduino Starter Kit", "Raspberry Pi 4", "Laptop Stand", "Cable Organizer", "Thermal Paste",
+            "Anti-Static Mat", "Magnifying Glass", "Scientific Calculator", "Planner 2024", "Whiteboard Markers",
+            "USB-C Hub", "External SSD 1TB", "Wireless Charger", "Monitor Arm", "Blue Light Glasses",
+            "Wire Strippers", "Heat Gun", "Glue Gun", "Online Course Voucher", "Kindle E-reader",
+            "Stylus Pen", "Tablet Stand", "Microscope USB", "3D Printer Filament", "Tool Box Organizer",
+            "Pliers Set", "Wrench Set", "Focus Timer", "Post-it Notes Pack", "Desk Mat",
+            "Ethernet Cable", "Wi-Fi Extender", "Bluetooth Adapter", "Screen Cleaning Kit", "Air Duster",
+            "Flash Drive 64GB", "Power Bank 20000mAh", "Label Printer", "Drawing Tablet", "Projector Mini"
+        ];
+
+        let products = productNames.map((name, index) => {
+            const category = categories[randomInt(0, 2)];
+            const source = sources[randomInt(0, 1)];
+            const isEssential = Math.random() < 0.3;
+            const price = randomInt(5, 120) + 0.99;
+            const shipping = Math.random() < 0.4 ? 0 : randomInt(2, 25) + 0.50;
+            
+            let dealTag = 'None';
+            if(source === 'AliExpress') dealTag = aliTags[randomInt(0, 3)];
+            else dealTag = jumiaTags[randomInt(0, 3)];
+
+            return {
+                id: index + 1,
+                name: name,
+                category: category,
+                source: source,
+                basePrice: price,
+                shipping: shipping,
+                totalPrice: price + shipping,
+                isEssential: isEssential,
+                dealTag: dealTag,
+                image: "📦" 
+            };
+        });
+
+        // --- 2. State Management ---
+        let currentFilter = 'all';
+        let currentSort = 'default';
+
+        // --- 3. Dynamic Receipt Generation (Method 4) ---
+        // This function creates the file on the fly
+        function generateReceipt(name, price, source, category, date) {
+            
+            // The content of the text file
+            const receiptText = `
+----------------------------------------
+          OFFICIAL RECEIPT
+----------------------------------------
+Store:       Tool & Tech Online
+Date:        ${new Date().toLocaleString()}
+----------------------------------------
+
+PRODUCT DETAILS:
+Item:        ${name}
+Category:    ${category}
+Source:      ${source}
+
+BILLING:
+Total Paid:  $${price.toFixed(2)}
+
+----------------------------------------
+Status:      Paid (Simulation)
+Thank you for downloading this receipt!
+----------------------------------------
+            `;
+
+            // Create Blob and Link
+            const blob = new Blob([receiptText], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${name.replace(/\s+/g, '_')}_Receipt.txt`; // e.g. "Usb_Hub_Receipt.txt"
+            
+            // Trigger Download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // --- 4. Render Function ---
+        const grid = document.getElementById('product-grid');
+        const totalPriceEl = document.getElementById('total-price');
+        const countEl = document.getElementById('count');
+
+        function renderProducts(list) {
+            grid.innerHTML = '';
+            let grandTotal = 0;
+
+            list.forEach(product => {
+                grandTotal += product.totalPrice;
+
+                // Badge Logic
+                let badgeHtml = '';
+                if(product.dealTag !== 'None') {
+                    let badgeClass = '';
+                    if(product.dealTag === 'Choice') badgeClass = 'deal-choice';
+                    else if(product.dealTag === 'SuperDeals') badgeClass = 'deal-super';
+                    else if(product.dealTag === 'Jumia Express') badgeClass = 'deal-express';
+                    else if(product.dealTag === 'Official Store') badgeClass = 'deal-official';
+                    badgeHtml = `<div class="deal-badge ${badgeClass}">${product.dealTag}</div>`;
+                }
+
+                // Shipping Logic
+                let shippingElem = product.shipping === 0 
+                    ? `<span class="free-ship-tag">Free Shipping</span>` 
+                    : "";
+
+                // Escape Name for JS function call
+                // (Prevents errors if product name has quotes)
+                const safeName = product.name.replace(/'/g, "\\'");
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        ${product.image}
+                        ${badgeHtml}
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-row">
+                            <span class="card-category">${product.category}</span>
+                            <span class="source-tag">${product.source}</span>
+                        </div>
+                        
+                        <div class="card-title">${product.name}</div>
+                        
+                        ${product.isEssential ? '<div class="essential-badge">ESSENTIAL</div>' : ''}
+                        
+                        <div class="card-footer">
+                            <div class="price-breakdown">
+                                $${product.basePrice.toFixed(2)} + ${product.shipping === 0 ? 'Free Ship' : '$' + product.shipping.toFixed(2) + ' ship'}
+                            </div>
+                            <div class="final-price-row">
+                                <span class="final-price-label">Total:</span>
+                                <span class="final-price">$${product.totalPrice.toFixed(2)}</span>
+                                ${shippingElem}
+                            </div>
+                            
+                            <button class="download-btn" onclick="generateReceipt('${safeName}', ${product.totalPrice}, '${product.source}', '${product.category}')">
+                                ⬇ Download Receipt
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            totalPriceEl.textContent = grandTotal.toFixed(2);
+            countEl.textContent = list.length;
+        }
+
+        // --- 5. Filtering & Sorting ---
+        function filterProducts(criteria) {
+            currentFilter = criteria;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let filteredList = products;
+            if (criteria !== 'all') {
+                if (criteria === 'essential') filteredList = products.filter(p => p.isEssential);
+                else if (criteria === 'freeShipping') filteredList = products.filter(p => p.shipping === 0);
+                else if (criteria === 'AliExpress' || criteria === 'Jumia') filteredList = products.filter(p => p.source === criteria);
+                else filteredList = products.filter(p => p.category === criteria);
+            }
+            applySortAndRender(filteredList);
+        }
+
+        function sortProducts() {
+            currentSort = document.getElementById('sort-select').value;
+            // Get current active filter
+            const activeBtn = document.querySelector('.filter-btn.active');
+            let criteria = activeBtn ? activeBtn.getAttribute('onclick').split("'")[1] : 'all';
+            
+            // Re-Filter
+            let filteredList = products;
+            if (criteria !== 'all') {
+                if (criteria === 'essential') filteredList = products.filter(p => p.isEssential);
+                else if (criteria === 'freeShipping') filteredList = products.filter(p => p.shipping === 0);
+                else if (criteria === 'AliExpress' || criteria === 'Jumia') filteredList = products.filter(p => p.source === criteria);
+                else filteredList = products.filter(p => p.category === criteria);
+            }
+            applySortAndRender(filteredList);
+        }
+
+        function applySortAndRender(list) {
+            let sortedList = [...list];
+            if (currentSort === 'price-asc') sortedList.sort((a, b) => a.totalPrice - b.totalPrice);
+            else if (currentSort === 'price-desc') sortedList.sort((a, b) => b.totalPrice - a.totalPrice);
+            else if (currentSort === 'essential') sortedList.sort((a, b) => (a.isEssential === b.isEssential) ? 0 : a.isEssential ? -1 : 1);
+            renderProducts(sortedList);
+        }
+
+        // Initial Render
+        renderProducts(products);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cure's Inventory Prospects 2025</title>
+    <style>
+        :root {
+            /* --- CORE THEME COLORS (From your style.css) --- */
+            --color-brown-darkest: #2D1C16;    /* Deep Chocolate (Primary Background) */
+            --color-brown-surface: #4B362A;    /* Mocha Brown (Surface/Cards) */
+            --color-chocolate: #7B3F00;      /* Primary Rich Accent (Chocolate) */
+            --color-orange-action: #FF8C00;    /* Action/Highlight (Dark Orange) */
+            --color-silver: #C0C0C0;       /* Secondary Accent/Border (Silver) */
+            --color-alice-blue: #F0F8FF;     /* Light Text/Card Base (Alice Blue) */
+            
+            /* --- SUPPORTING COLORS --- */
+            --color-cream: #FFFDD0;               
+            --color-teal-patina: #008080;         
+            --color-burgundy: #800020;            
+            --color-copper: #B87333;              
+            
+            /* Functional Variables */
+            --color-cosmos: var(--color-brown-darkest);
+            --color-surface: var(--color-brown-surface);
+            --color-primary-start: var(--color-chocolate);
+            --color-gold: var(--color-copper); 
+            --color-teal: var(--color-orange-action);
+            --color-text-light: var(--color-alice-blue);
+            --color-text-dim: #A9A9A9;
+            --color-hover-fade: var(--color-copper);
+
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --transition-speed: 0.35s;
+        }
+
+        body {
+            margin: 0;
+            background: var(--color-brown-darkest);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden; /* Prevent page-wide horizontal scroll, strictly internal */
+        }
+
+        /* =========================================
+           1. NAVBAR (Dynamic)
+           ========================================= */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--color-brown-surface);
+            border-bottom: 2px solid var(--color-orange-action);
+            z-index: 1000;
+            transition: transform 0.4s ease-in-out;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-hidden { transform: translateY(-100%); }
+
+        .nav-content {
+            width: 90%;
+            max-width: 1500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-orange-action);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        .nav-links a, .dropbtn {
+            color: var(--color-alice-blue);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .dropbtn:hover { color: var(--color-orange-action); }
+
+        /* Dropdown */
+        .nav-dropdown { position: relative; height: 100%; display: flex; align-items: center; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--color-cream);
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            border: 1px solid var(--color-copper);
+        }
+        .dropdown-content a {
+            color: var(--color-brown-darkest);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .dropdown-content a:hover { background-color: var(--color-orange-action); color: white; }
+        .nav-dropdown:hover .dropdown-content { display: block; }
+
+        /* =========================================
+           2. LANDING SECTION
+           ========================================= */
+        .landing-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 70px; }
+        .landing-grid0 { max-width: 1500px; display: flex; flex-direction: column; align-items: center; margin: 0 auto; padding: 20px 0; }
+        
+        .landing-header h1 {
+            margin-bottom: 20px; padding: 30px;
+            border: 1px solid var(--color-orange-action);
+            border-radius: 20px;
+            color: var(--color-copper);
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 1.1;
+            text-align: center;
+        }
+        
+        .landing-message p { width: 100%; font-size: 1.3rem; color: var(--color-text-dim); text-align: center; }
+        .landing-message p:nth-child(2) { color: var(--color-gold); font-style: italic; font-weight: 600; }
+        
+        .tool-bag-link { margin-top: 50px; display: flex; gap: 20px; }
+        .tools-connect {
+            padding: 10px 25px;
+            background: var(--color-surface);
+            border: 2px solid var(--color-copper);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+        .tools-connect:hover { background: var(--color-teal); border-color: var(--color-teal); transform: scale(1.05) translateY(-3px); }
+        .tools-connect a { color: var(--color-text-light); font-weight: 600; text-decoration: none; }
+        .tools-connect:hover a { color: var(--color-brown-darkest); }
+
+        /* =========================================
+           3. PROSPECTS SECTION (Restored Horizontal Layout)
+           ========================================= */
+        .tool-bag-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background-color: var(--color-brown-darkest);
+            /* This ensures scroll margin works when navigating from navbar */
+            scroll-margin-top: 70px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .tool-bag {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 20rem; /* Spacing between groups */
+            overflow-x: auto; /* Horizontal Scroll Enabled */
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            /* Hide Scrollbar */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .tool-bag::-webkit-scrollbar { display: none; }
+
+        /* Groups */
+        .tools-group {
+            position: sticky;
+            /* Sticky logic from original CSS */
+            left: calc(var(--index) * 4rem); 
+            
+            width: 85vw; /* Adjusted for viewport width */
+            max-width: 1200px;
+            height: 85%;
+            
+            display: grid;
+            grid-template-rows: 17% 83%;
+            align-content: center;
+            justify-items: center;
+            flex-shrink: 0;
+
+            background-color: var(--color-brown-surface);
+            border-radius: 30px;
+        }
+
+        .learn-tools { margin-left: 5vw; --index: 1; }
+        .repair-tools { --index: 2; }
+        .prod-tools { --index: 3; }
+
+        /* Brief Header */
+        .tool-bag-brief-container {
+            width: 100%; height: 100%; display: flex;
+            box-shadow: 0 5px 50px rgba(0, 0, 0, 0.305);
+            border-radius: 15px;
+            background: rgba(0,0,0,0.2);
+        }
+        .tool-bag-brief { width: 100%; display: flex; padding: 0 20px; align-items: center; }
+        .tool-bag-brief-brief { width: 75%; display: flex; flex-direction: column; justify-content: center; color: var(--color-copper); }
+        .tool-bag-brief-brief h1 { font-size: 3rem; margin: 0; }
+        .tool-bag-brief-brief p { font-size: 1.1rem; margin: 5px 0 0 0; color: var(--color-silver); }
+
+        /* Grid inside Group */
+        .tool-bag-grid-container {
+            position: relative;
+            height: 100%; width: 100%;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; /* Important for side panel slide-in */
+        }
+        .tool-bag-grid {
+            height: 92%; width: 95%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
+            gap: 1.2rem;
+            overflow-y: auto; /* Vertical scroll for cards inside the horizontal group */
+            padding: 10px;
+            /* Hide scrollbar */
+            scrollbar-width: none;
+        }
+        .tool-bag-grid::-webkit-scrollbar { display: none; }
+
+        /* --- TOOL CARD (Restored Original Styles) --- */
+        .tool-card {
+            position: relative;
+            height: clamp(5rem, 100%, 25rem);
+            /* width: 100%; */
+            display: flex;
+            flex-direction: column;
+            justify-items: left;
+            background-color: rgb(240, 255, 255); /* Original AliceBlue-ish */
+            border-radius: 12px;
+            box-shadow: 0 10px 17px rgba(0, 0, 0, 0.24);
+            transition: 0.3s;
+            overflow: hidden;
+            cursor: pointer;
+            color: black; /* Reset text color for light card */
+        }
+        .tool-card:hover { transform: scale(1.03); z-index: 2; }
+        
+        .tool-pics-container { width: 100%; height: 55%; flex-shrink: 0; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; font-size: 3rem; }
+        .tool-card h1 { font-size: 1.2rem; margin: 5px 10px 0; } /* Name */
+        .tool-store { font-size: 0.9rem; margin: 0 10px; color: var(--color-teal-patina); text-transform: uppercase;}
+        .tool-price { width: 100%; font-size: 1.5rem; margin: 5px 10px 10px; color: var(--color-chocolate); }
+
+        /* Go To Page Slide-up */
+        .go-to-page {
+            position: absolute; bottom: 0;
+            background-color: brown;
+            height: 15%; width: 0;
+            border-radius: 0 0 8px 8px;
+            font-size: small;
+            transition: .3s;
+            overflow: hidden;
+            z-index: 1;
+            white-space: nowrap;
+        }
+        .tool-card:hover .go-to-page { width: 100%; }
+        .go-to-page span {
+            color: white; padding: 8px 0 0 15px; display: block;
+        }
+
+        /* --- SLIDE-IN DETAIL PANEL (New logic, styled for horizontal view) --- */
+        .tool-bag-tdescr {
+            position: absolute;
+            top: 0; right: 0;
+            width: 45%; height: 100%;
+            background: var(--color-brown-darkest);
+            border-left: 2px solid var(--color-gold);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            transform: translateX(100%);
+            transition: transform 0.4s ease-out;
+            z-index: 10;
+            padding: 30px;
+            overflow-y: auto;
+            color: var(--color-alice-blue);
+            display: flex; flex-direction: column;
+        }
+        .tool-bag-tdescr.is-visible { transform: translateX(0); }
+        
+        .tool-bag-tdescr h2 { 
+            font-size: 2.2rem; border-bottom: 3px solid var(--color-gold); 
+            padding-bottom: 15px; margin-bottom: 20px; color: var(--color-cream);
+        }
+        .detail-price { font-size: 2rem; color: var(--color-gold); font-weight: 700; margin: 10px 0; }
+        .detail-info h3 { color: var(--color-teal); margin-top: 20px; text-transform: uppercase; font-size: 1rem; }
+        .detail-link { 
+            background: linear-gradient(90deg, var(--color-teal), #008f7a);
+            color: white; padding: 12px 30px; border-radius: 50px; 
+            text-align: center; margin-top: 30px; cursor: pointer; border: none; font-size: 1rem;
+        }
+
+        .tool-group-spacer { min-width: 10vw; height: 100%; }
+
+        /* =========================================
+           4. SUMMARY PAGE (Modified to Palette)
+           ========================================= */
+        .summary-page { background-color: var(--color-cream); min-height: 100vh; padding-top: 80px; }
+        
+        .summary-brief-container { height: 20vh; display: flex; justify-content: center; align-items: center; }
+        .summary-brief { 
+            width: 60%; height: 85%; display: flex; justify-content: center; align-items: center; 
+            border-bottom: 2px solid var(--color-primary-start); 
+        }
+        .summary-brief h1 { color: var(--color-gold); text-transform: uppercase; font-size: 3rem; margin: 0; }
+        .summary-brief p { color: var(--color-brown-surface); margin-left: 20px; }
+        
+        .summary-price { 
+            padding: 0 20px; background-color: var(--color-brown-surface); 
+            border-radius: 1rem 1rem 0 0; color: white; display: flex; flex-direction: column; justify-content: center;
+            height: 100%;
+        }
+
+        /* Utility Bar */
+        .summary-grid-utility-container { padding: 1rem; max-width: 1400px; margin: 0 auto; }
+        .utility-bar { display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; margin-bottom: 30px; }
+        
+        .summary-filter-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        
+        .filter-button {
+            padding: 8px 16px;
+            border: 2px solid var(--color-brown-surface);
+            border-radius: 50px;
+            background: transparent;
+            cursor: pointer;
+            color: var(--color-brown-surface);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .filter-button:hover, .filter-button.active {
+            background-color: var(--color-teal);
+            border-color: var(--color-teal);
+            color: var(--color-brown-darkest);
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .sort-select {
+            padding: 8px 16px; border-radius: 20px;
+            border: 2px solid var(--color-brown-surface);
+            background: var(--color-cream); color: var(--color-brown-darkest);
+        }
+
+        /* Grid */
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px; padding-bottom: 50px;
+        }
+
+        /* Summary Card - Palette Applied */
+        .summary-card {
+            background-color: var(--color-brown-surface); /* Darker card base */
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            display: flex; flex-direction: column;
+            color: var(--color-alice-blue);
+            transition: transform 0.3s;
+            border: 1px solid var(--color-brown-darkest);
+            position: relative;
+        }
+        .summary-card:hover { transform: translateY(-10px); border-color: var(--color-gold); }
+
+        .card-image { height: 140px; background-color: var(--color-alice-blue); display: flex; justify-content: center; align-items: center; font-size: 3rem; position: relative; }
+        
+        /* Badges */
+        .deal-badge { position: absolute; top: 10px; right: 10px; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; color: var(--color-brown-darkest); text-transform: uppercase; }
+        .deal-choice { background: var(--color-gold); }
+        .deal-express { background: var(--color-orange-action); }
+        .deal-official { background: var(--color-silver); }
+
+        .card-body { padding: 1rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .meta-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .card-category { font-size: 0.75rem; color: var(--color-silver); text-transform: uppercase; }
+        .source-tag { font-size: 0.75rem; color: var(--color-orange-action); font-weight: bold; }
+        
+        .card-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 0.5rem 0; color: var(--color-cream); }
+        
+        .essential-badge { 
+            background: var(--color-burgundy); color: var(--color-cream); 
+            font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; align-self: start; margin-bottom: 10px;
+        }
+
+        .card-footer { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--color-silver); }
+        .final-price-row { display: flex; justify-content: space-between; align-items: baseline; }
+        .final-price { font-size: 1.4rem; color: var(--color-gold); font-weight: bold; }
+        .shipping-info { font-size: 0.8rem; color: var(--color-silver); }
+        .free-ship { color: var(--color-teal); font-weight: bold; }
+
+        /* =========================================
+           5. CLOSING
+           ========================================= */
+        .closing { height: 80vh; display: flex; align-items: center; justify-content: center; background: var(--color-cream); text-align: center; }
+        .closing-message h1 { color: var(--color-brown-darkest); font-size: 4rem; }
+        .closing-message p { color: var(--color-brown-surface); font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
+
+    </style>
+</head>
+<body id="home">
+
+    <nav id="navbar" class="main-nav">
+        <div class="nav-content">
+            <a href="#home" class="nav-logo">CURE 2025</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <div class="nav-dropdown">
+                    <a href="#prospects" class="dropbtn">Prospects ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#prospects" onclick="scrollToGroup('learn')">Learning</a>
+                        <a href="#prospects" onclick="scrollToGroup('repair')">Repairs</a>
+                        <a href="#prospects" onclick="scrollToGroup('prod')">Productivity</a>
+                    </div>
+                </div>
+                <a href="#summary-page">Summary</a>
+                <a href="#closing">Closing</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="landing-page">
+        <div class="landing-grid0 animate-in">
+            <div class="landing-header">
+                <h1 class="gradient-text">Stefan's New Prospect <br>(2025 - 2026)</h1>
+            </div>
+            <div class="landing-message">
+                <p> I’ve been thinking of running a small business called **CURE – Computer Upgrade and Repair Environment**. This webpage lists tools to realize my business plan.</p>                
+                <p>— Stefan</p>
+            </div>
+            <div class="tool-bag-link">
+                <button class="tools-connect" onclick="scrollToGroup('learn')"><a href="#prospects">Learning</a></button>
+                <button class="tools-connect" onclick="scrollToGroup('repair')"><a href="#prospects">Repairs</a></button>
+                <button class="tools-connect" onclick="scrollToGroup('prod')"><a href="#prospects">Productivity</a></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="prospects" class="tool-bag-container">
+        <div class="tool-bag" id="toolBagScroll">
+            
+            <div id="group-learn" class="learn-tools tools-group">
+                <div class="tool-bag-brief-container">
+                    <div class="tool-bag-brief">
+                        <div class="tool-bag-brief-brief">
+                            <h1>Learning Tools</h1>
+                            <p>Embedded systems, Arduino kits, and power bank projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tool-bag-grid-container">
+                    <div class="tool-bag-grid" id="grid-learning">
+                        </div>
+                </div>
+            </div>
+
+            <div id="group-repair" class="repair-tools tools-group">
+                <div class="tool-bag-brief-container">
+                    <div class="tool-bag-brief">
+                        <div class="tool-bag-brief-brief">
+                            <h1>Repair Tools</h1>
+                            <p>Soldering stations, screwdrivers, and diagnostics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tool-bag-grid-container">
+                    <div class="tool-bag-grid" id="grid-repair">
+                        </div>
+                </div>
+            </div>
+
+            <div id="group-prod" class="prod-tools tools-group">
+                <div class="tool-bag-brief-container">
+                    <div class="tool-bag-brief">
+                        <div class="tool-bag-brief-brief">
+                            <h1>Productivity</h1>
+                            <p>Organization, software, and workspace enhancements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tool-bag-grid-container">
+                    <div class="tool-bag-grid" id="grid-productivity">
+                        </div>
+                </div>
+            </div>
+
+            <div class="tool-group-spacer"></div>
+        </div>
+    </section>
+
+    <section id="summary-page" class="summary-page">
+        <div class="summary-brief-container">
+            <div class="summary-brief">                   
+                <div class="summary-brief-text"> 
+                    <h1>The Grand Total Summary</h1>
+                    <p>Comprehensive catalog of all 50 items.</p>                        
+                </div>
+                <div class="summary-price">
+                    <p>Total Est.</p>
+                    <p id="grand-total-display" style="font-size: 2.5rem; margin: 0; color: var(--color-gold); font-weight: bold;">£0.00</p>
+                </div>
+            </div>                
+        </div>
+
+        <div class="summary-grid-utility-container">
+            <div class="utility-bar">
+                <div class="summary-filter-container">
+                    <button class="filter-button active" onclick="filterSummary('all', this)">All Items</button>
+                    <button class="filter-button" onclick="filterSummary('essential', this)">Essentials</button>
+                    <button class="filter-button" onclick="filterSummary('AliExpress', this)">AliExpress</button>
+                    <button class="filter-button" onclick="filterSummary('Jumia', this)">Jumia</button>
+                    <button class="filter-button" onclick="filterSummary('Temu', this)">Temu</button>
+                    <button class="filter-button" onclick="filterSummary('Learning', this)">Learning</button>
+                    <button class="filter-button" onclick="filterSummary('Repair', this)">Repair</button>
+                    <button class="filter-button" onclick="filterSummary('Productivity', this)">Productivity</button>
+                </div>
+
+                <div class="sort-div">
+                    <select id="sort-select" class="sort-select" onchange="sortSummary()">
+                        <option value="default">Sort By...</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="essential">Most Essential</option>
+                    </select>
+                </div>                
+            </div>
+
+            <div class="container">
+                <h3 style="margin-bottom: 20px; color: var(--color-brown-surface);">Showing <span id="count">0</span> products</h3>
+                <div class="product-grid" id="summaryGrid">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="closing" class="closing">
+        <div class="closing-message">
+            <h1>A Message From Stefan</h1>
+            <p>I have found four people who can train me. I intend to register under one of the experts who has a shop to master the trade. Thank you for viewing my business plan inventory.</p>
+        </div>
+    </section>
+
+    <script>
+        /* =========================================
+           1. MASTER INVENTORY DATA
+           ========================================= */
+        const inventory = [
+            // --- LEARNING TOOLS ---
+            { id: 1, name: "Arduino Uno R3 Kit", category: "Learning", store: "AliExpress", basePrice: 45.00, shipping: 0, isEssential: true, essentialRank: 1, dealTag: "Choice", brief: "Core MCU kit.", description: "Starter kit with Uno R3, breadboard, and sensors.", specs: ["ATmega328P", "14 Digital I/O"], image: "🔌" },
+            { id: 2, name: "Raspberry Pi 5", category: "Learning", store: "AliExpress", basePrice: 85.00, shipping: 5.00, isEssential: false, essentialRank: 0, dealTag: "SuperDeals", brief: "Mini PC.", description: "8GB RAM model for high-level coding.", specs: ["8GB RAM", "Quad-Core"], image: "🍓" },
+            { id: 3, name: "DC Power Supply", category: "Learning", store: "Jumia", basePrice: 60.00, shipping: 0, isEssential: true, essentialRank: 3, dealTag: "Official Store", brief: "Bench power.", description: "0-30V 10A adjustable supply.", specs: ["0-30V", "10A"], image: "⚡" },
+            { id: 4, name: "Breadboard Kit", category: "Learning", store: "Temu", basePrice: 8.50, shipping: 0, isEssential: true, essentialRank: 5, dealTag: "None", brief: "Prototyping.", description: "MB-102 board with 65 wires.", specs: ["830 Points"], image: "🍞" },
+            { id: 5, name: "Component Box", category: "Learning", store: "AliExpress", basePrice: 15.00, shipping: 3.00, isEssential: false, essentialRank: 0, dealTag: "Choice", brief: "Spares.", description: "Resistors, caps, LEDs assortment.", specs: ["Mixed Values"], image: "📦" },
+            { id: 6, name: "ESP32 Module", category: "Learning", store: "AliExpress", basePrice: 12.00, shipping: 0, isEssential: false, essentialRank: 0, dealTag: "None", brief: "IoT Dev.", description: "Wi-Fi + Bluetooth microcontroller.", specs: ["Dual Core"], image: "📶" },
+            { id: 7, name: "Soldering Wire", category: "Learning", store: "Jumia", basePrice: 5.00, shipping: 0, isEssential: true, essentialRank: 4, dealTag: "None", brief: "Consumable.", description: "60/40 Rosin Core solder.", specs: ["0.8mm"], image: "➰" },
+            { id: 8, name: "Power Bank BMS", category: "Learning", store: "AliExpress", basePrice: 35.00, shipping: 4.50, isEssential: false, essentialRank: 0, dealTag: "None", brief: "Project.", description: "BMS for laptop power bank build.", specs: ["65W PD"], image: "🔋" },
+
+            // --- REPAIR TOOLS ---
+            { id: 10, name: "iFixit Driver Kit", category: "Repair", store: "AliExpress", basePrice: 65.00, shipping: 10.00, isEssential: true, essentialRank: 2, dealTag: "Choice", brief: "Screwdrivers.", description: "112-bit driver kit for all electronics.", specs: ["S2 Steel"], image: "🛠️" },
+            { id: 11, name: "T12 Soldering Stn", category: "Repair", store: "AliExpress", basePrice: 40.00, shipping: 0, isEssential: true, essentialRank: 6, dealTag: "SuperDeals", brief: "Soldering.", description: "Quick heating station for logic boards.", specs: ["200-480C"], image: "🔥" },
+            { id: 12, name: "Fluke Multimeter", category: "Repair", store: "Jumia", basePrice: 55.00, shipping: 0, isEssential: true, essentialRank: 7, dealTag: "Official Store", brief: "Testing.", description: "Reliable multimeter for diagnostics.", specs: ["True RMS"], image: "📟" },
+            { id: 13, name: "USB Microscope", category: "Repair", store: "Temu", basePrice: 30.00, shipping: 0, isEssential: false, essentialRank: 0, dealTag: "None", brief: "Inspection.", description: "1000x zoom for PCB inspection.", specs: ["1080p"], image: "🔬" },
+            { id: 14, name: "Silicone Mat", category: "Repair", store: "Jumia", basePrice: 15.00, shipping: 2.00, isEssential: true, essentialRank: 8, dealTag: "None", brief: "ESD.", description: "Heat resistant anti-static mat.", specs: ["500C Resist"], image: "🟦" },
+            { id: 15, name: "Pry Tools", category: "Repair", store: "Temu", basePrice: 5.00, shipping: 0, isEssential: true, essentialRank: 9, dealTag: "None", brief: "Opening.", description: "Spudgers and picks.", specs: ["Nylon"], image: "⛏️" },
+            { id: 16, name: "MX-4 Paste", category: "Repair", store: "Jumia", basePrice: 8.00, shipping: 1.00, isEssential: true, essentialRank: 10, dealTag: "Official Store", brief: "Cooling.", description: "Thermal compound for CPUs.", specs: ["8.5 W/mK"], image: "🌡️" },
+            { id: 17, name: "Flux & Wick", category: "Repair", store: "AliExpress", basePrice: 10.00, shipping: 0, isEssential: true, essentialRank: 11, dealTag: "Choice", brief: "Cleanup.", description: "Desoldering supplies.", specs: ["Rosin Flux"], image: "🧹" },
+
+            // --- PRODUCTIVITY ---
+            { id: 20, name: "Mesh Chair", category: "Productivity", store: "Jumia", basePrice: 120.00, shipping: 20.00, isEssential: false, essentialRank: 0, dealTag: "Official Store", brief: "Comfort.", description: "Ergonomic chair.", specs: ["Lumbar"], image: "🪑" },
+            { id: 21, name: "Magnetic Mat", category: "Productivity", store: "AliExpress", basePrice: 6.00, shipping: 0, isEssential: true, essentialRank: 12, dealTag: "Choice", brief: "Screws.", description: "Magnetic pad for screws.", specs: ["A4 Size"], image: "🧲" },
+            { id: 22, name: "Storage Drawers", category: "Productivity", store: "Jumia", basePrice: 30.00, shipping: 5.00, isEssential: false, essentialRank: 0, dealTag: "None", brief: "Parts.", description: "Cabinet for spares.", specs: ["24 Drawers"], image: "🗄️" },
+            { id: 23, name: "Whiteboard", category: "Productivity", store: "Temu", basePrice: 15.00, shipping: 0, isEssential: false, essentialRank: 0, dealTag: "None", brief: "Notes.", description: "Small wall board.", specs: ["60x40cm"], image: "📝" },
+            { id: 24, name: "Camera Arm", category: "Productivity", store: "AliExpress", basePrice: 25.00, shipping: 0, isEssential: false, essentialRank: 0, dealTag: "None", brief: "Filming.", description: "Overhead mount.", specs: ["Clamp"], image: "📷" }
+        ];
+
+        /* =========================================
+           2. NAVBAR & SCROLL LOGIC
+           ========================================= */
+        const navbar = document.getElementById("navbar");
+        let lastScrollTop = 0;
+
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.classList.add("nav-hidden");
+            } else {
+                navbar.classList.remove("nav-hidden");
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Horizontal Scroll Helper
+        function scrollToGroup(groupName) {
+            const container = document.getElementById('toolBagScroll');
+            const target = document.getElementById(`group-${groupName}`);
+            
+            // 1. Scroll vertical page to #prospects
+            document.getElementById('prospects').scrollIntoView({behavior: 'smooth'});
+
+            // 2. Scroll horizontal container to specific group
+            if(container && target) {
+                // Calculation to center the group in the view
+                const scrollLeft = target.offsetLeft - (window.innerWidth - target.offsetWidth) / 2;
+                container.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        /* =========================================
+           3. PROSPECTS RENDERING (Restored Original Card Style)
+           ========================================= */
+        function renderProspects() {
+            const categories = {
+                'Learning': document.getElementById('grid-learning'),
+                'Repair': document.getElementById('grid-repair'),
+                'Productivity': document.getElementById('grid-productivity')
+            };
+
+            for (let key in categories) { if(categories[key]) categories[key].innerHTML = ''; }
+
+            inventory.forEach(item => {
+                const container = categories[item.category];
+                if (container) {
+                    const card = document.createElement('div');
+                    card.className = 'tool-card';
+                    
+                    const productData = JSON.stringify({
+                        name: item.name, description: item.description, specs: item.specs,
+                        price: `£${item.basePrice.toFixed(2)}`, store: item.store
+                    });
+                    card.setAttribute('data-product-details', productData);
+
+                    // Restored Layout: Pics -> H1(Name) -> H5(Store) -> H1(Price) -> SlideUp Div
+                    card.innerHTML = `
+                        <div class="tool-pics-container">${item.image}</div>
+                        <h1 class="tool-name">${item.name}</h1>
+                        <h5 class="tool-store">${item.store}</h5>
+                        <h1 class="tool-price">£${item.basePrice.toFixed(2)}</h1>  
+                        <div class="go-to-page">
+                            <span>View Details ➔</span>                            
+                        </div>  
+                    `;
+                    card.addEventListener('click', handleCardClick);
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        function handleCardClick(e) {
+            const card = e.currentTarget;
+            const gridContainer = card.closest('.tool-bag-grid-container');
+            const detailsString = card.getAttribute('data-product-details');
+            if (!detailsString) return;
+            const product = JSON.parse(detailsString);
+            
+            const specsHTML = (product.specs && product.specs.length > 0) ? product.specs.map(s => `<li>${s}</li>`).join('') : '<li>N/A</li>';
+
+            const innerHTML = `
+                <h2>${product.name}</h2>
+                <div class="detail-price">${product.price}</div>
+                <div class="detail-info">
+                    <h3>Description</h3> <p>${product.description}</p>
+                    <h3>Specifications</h3> <ul>${specsHTML}</ul>
+                    <h3>Store</h3> <p>${product.store}</p>
+                </div>
+                <button class="detail-link">Visit Store</button>
+            `;
+
+            let existingDescr = gridContainer.querySelector('.tool-bag-tdescr');
+            if (!existingDescr) {
+                existingDescr = document.createElement('div');
+                existingDescr.className = 'tool-bag-tdescr';
+                gridContainer.appendChild(existingDescr);
+            }
+            existingDescr.innerHTML = innerHTML;
+            requestAnimationFrame(() => { existingDescr.classList.add('is-visible'); });
+        }
+
+        /* =========================================
+           4. SUMMARY RENDERING (New Grid + Palette)
+           ========================================= */
+        let currentFilter = 'all';
+        let currentSort = 'default';
+
+        function renderSummary(items) {
+            const grid = document.getElementById('summaryGrid');
+            const countEl = document.getElementById('count');
+            const totalEl = document.getElementById('grand-total-display');
+            if(!grid) return;
+
+            grid.innerHTML = '';
+            let grandTotal = 0;
+
+            items.forEach(item => {
+                const shippingCost = item.shipping || 0;
+                const totalCost = item.basePrice + shippingCost;
+                grandTotal += totalCost;
+
+                // Badges
+                let badgeHtml = '';
+                if(item.dealTag && item.dealTag !== 'None') {
+                    let badgeClass = 'deal-official';
+                    if(item.dealTag === 'Choice') badgeClass = 'deal-choice';
+                    else if(item.dealTag === 'Jumia Express') badgeClass = 'deal-express';
+                    else if(item.dealTag === 'SuperDeals') badgeClass = 'deal-super';
+                    badgeHtml = `<div class="deal-badge ${badgeClass}">${item.dealTag}</div>`;
+                }
+
+                const essentialHtml = item.isEssential ? '<div class="essential-badge">ESSENTIAL</div>' : '';
+                const shippingHtml = shippingCost === 0 
+                    ? '<span class="free-ship">Free Ship</span>' 
+                    : `<span class="shipping-info">+£${shippingCost.toFixed(2)}</span>`;
+
+                const card = document.createElement('div');
+                card.className = 'summary-card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        ${item.image}
+                        ${badgeHtml}
+                    </div>
+                    <div class="card-body">
+                        <div class="meta-row">
+                            <span class="card-category">${item.category}</span>
+                            <span class="source-tag">${item.store}</span>
+                        </div>
+                        <div class="card-title">${item.name}</div>
+                        ${essentialHtml}
+                        <div class="card-footer">
+                            <div class="final-price-row">
+                                <span class="final-price">£${totalCost.toFixed(2)}</span>
+                                ${shippingHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            countEl.textContent = items.length;
+            totalEl.textContent = `£${grandTotal.toFixed(2)}`;
+        }
+
+        function filterSummary(criteria, btnElement) {
+            currentFilter = criteria;
+            if(btnElement) {
+                document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+
+            let filtered = inventory;
+
+            if (criteria !== 'all') {
+                if (criteria === 'essential') {
+                    filtered = inventory.filter(i => i.isEssential);
+                } else if (criteria === 'AliExpress' || criteria === 'Jumia' || criteria === 'Temu') {
+                    filtered = inventory.filter(i => i.store === criteria);
+                } else {
+                    filtered = inventory.filter(i => i.category === criteria);
+                }
+            }
+            applySortAndRender(filtered);
+        }
+
+        function sortSummary() {
+            currentSort = document.getElementById('sort-select').value;
+            // Quick re-filter logic based on active button
+            const activeBtn = document.querySelector('.filter-button.active');
+            // Simplified refilter:
+            let list = inventory;
+            if (currentFilter !== 'all') {
+                if(currentFilter === 'essential') list = list.filter(i => i.isEssential);
+                else if(currentFilter === 'AliExpress' || currentFilter === 'Jumia' || currentFilter === 'Temu') list = list.filter(i => i.store === currentFilter);
+                else list = list.filter(i => i.category === currentFilter);
+            }
+            applySortAndRender(list);
+        }
+
+        function applySortAndRender(list) {
+            let sorted = [...list];
+            if (currentSort === 'price-asc') sorted.sort((a, b) => (a.basePrice + a.shipping) - (b.basePrice + b.shipping));
+            else if (currentSort === 'price-desc') sorted.sort((a, b) => (b.basePrice + b.shipping) - (a.basePrice + a.shipping));
+            else if (currentSort === 'essential') sorted.sort((a, b) => {
+                if (a.isEssential && !b.isEssential) return -1;
+                if (!a.isEssential && b.isEssential) return 1;
+                return (a.essentialRank || 99) - (b.essentialRank || 99);
+            });
+            renderSummary(sorted);
+        }
+
+        /* =========================================
+           5. INIT
+           ========================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProspects();
+            renderSummary(inventory);
+
+            // Global Click to Close Panel
+            document.addEventListener('click', (event) => {
+                const isCard = event.target.closest('.tool-card');
+                const isInside = event.target.closest('.tool-bag-tdescr');
+                if (!isCard && !isInside) {
+                    const panels = document.querySelectorAll('.tool-bag-tdescr.is-visible');
+                    panels.forEach(p => {
+                        p.classList.remove('is-visible');
+                        setTimeout(() => { if(!p.classList.contains('is-visible')) p.remove(); }, 400);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
