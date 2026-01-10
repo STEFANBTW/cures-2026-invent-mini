@@ -32,6 +32,7 @@
 
 	/* --- FONT SCALING --- */
 	--font-scale: 1;
+
 }
 
 html {
@@ -40,7 +41,10 @@ html {
 
 body {
 	margin: 0;
-	background: var(--color-brown-darkest);
+    padding: 0;
+    padding-inline: 0;
+    margin-inline: 0;
+    background: var(--color-brown-darkest);
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color: var(--color-alice-blue);
 }
@@ -122,6 +126,7 @@ body.large-font {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-logo-container {
@@ -2403,19 +2408,23 @@ body.large-font {
         align-items: center;
         justify-content: center;
         gap: 0;
+        margin: 20px 0 5px;
     }
     .nav-logo {
-        padding: 15px 0;
+        padding: 5px 0;
     }    
     .logo-interlink {
         margin-bottom: 0;
+        position: absolute;
+        top: 5px;
+        right: 15px;
     }
     .nav-links {
         gap: 20px;
         flex-wrap: wrap;
         justify-content: center;
         background-color: color-mix(in srgb, var(--color-brown-surface), transparent 85%);
-        padding: 10px;
+        padding: 7px;
         width: 100%;
     }
     .nav-links a{
