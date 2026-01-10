@@ -1009,7 +1009,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Load summary.js dynamically
                     const summaryScript = document.createElement('script');
-                    summaryScript.src = 'summary.js';
+                    summaryScript.src = 'summary.min.js';
                     summaryScript.onload = () => {
                         console.log('Summary.js loaded successfully');
                         // Once summary.js is loaded, renderSummary is available
