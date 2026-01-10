@@ -124,6 +124,12 @@ body.large-font {
     align-items: center;
 }
 
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .nav-logo {
     font-size: calc(29px * var(--font-scale, 1));
     font-weight: 800;
@@ -132,6 +138,31 @@ body.large-font {
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 20px;
+}
+
+.logo-interlink {
+    border: 2px solid var(--color-copper);
+    border-radius: 8px;
+    height: max-content;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    position: relative;
+    color: var(--color-copper);
+    text-decoration: none;
+    font-weight: medium;
+    font-size: calc(10px * var(--font-scale, 1));
+    padding: 2px 5px;
+    margin-bottom: -15px;
+    transition: all var(--transition-speed);
+}
+
+.logo-interlink:hover {
+    border: 2px solid var(--color-orange-action);
+    box-shadow: 0 0 20px 1px #ff8c0050;
+    transform: translateY(-3px);
+    color: var(--color-alice-blue);
+    font-size: calc(14px * var(--font-scale, 1));
+    padding: 5px 10px;
 }
 
 .nav-links {
@@ -143,18 +174,19 @@ body.large-font {
 
 .nav-links a,
 .dropbtn {
-    color: var(--color-alice-blue);
+    color: var(--color-orange-action);
     text-decoration: none;
     font-size: calc(18px * var(--font-scale, 1));
     font-weight: 600;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.5s;
     position: relative;
 }
 
 .nav-links a:hover,
 .dropbtn:hover {
-    color: var(--color-orange-action);
+    color: var(--color-alice-blue);
+    text-shadow: 0 0 50px #f4fbffbc;
 }
 
 /* Dropdown Styles */

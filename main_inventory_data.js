@@ -725,7 +725,7 @@ const inventory = [
             "Aliexpress_Downloads/1005006144235719/image_9.jpg"
         ],
         "productLink": "https://www.aliexpress.com/item/1005006144235719.html",
-        "category": "Learning & Repair",
+        "category": "Repair",
         "isEssential": true,
         "essentialRank": 1,
         "quantity": 1,
