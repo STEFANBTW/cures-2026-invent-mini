@@ -988,11 +988,6 @@ body.large-font {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-
-.panel-meta-row .essential-badge {
-    background-color: var(--essential-bg);
-}
-
 .panel-meta-row .card-category {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 4px;
@@ -1004,6 +999,7 @@ body.large-font {
     pointer-events: auto;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background-color: var(--essential-bg);
 }
 
 .slider-controls {

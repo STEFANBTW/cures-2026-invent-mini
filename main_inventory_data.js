@@ -602,13 +602,16 @@ const inventory = [
         ],
         "description": "Enterprise-grade performance for serious businesses. Unlike shared hosting, this plan gives you dedicated resources that no one else can hog. Powered by NVMe storage and a custom-built infrastructure, it ensures lightning-fast load times, critical for SEO and user retention. It includes a full suite of pro features: dedicated IP for reputation, daily backups for peace of mind, and a global CDN to serve customers anywhere instantly.",
         "images": [
-            "images/tools/prod/25 - headphone amp/main_images/main-image-1.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-2.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-3.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-4.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-5.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-6.jpeg",
-            "images/tools/prod/25 - headphone amp/main_images/main-image-7.jpeg"
+            "hostairtel/main-image_1.png",
+            "hostairtel/main-image_2.png",
+            "hostairtel/main-image_3.png",
+            "hostairtel/main-image_4.png",
+            "hostairtel/main-image_5.png",
+            "hostairtel/main-image_6.png",
+            "hostairtel/main-image_7.png",
+            "hostairtel/main-imag15.jpg",
+            "hostairtel/image-27.png",
+            "hostairtel/Hostinger-presentation.png"
         ],
         "productLink": "https://hpanel.hostinger.com/buy-hosting",
         "category": "Productivity",
@@ -841,7 +844,11 @@ const inventory = [
             "Duration: 120",
             "Price: ₦60,000"
         ],
-        "images": [],
+        "images": [
+            "hostairtel/main-image10.jpg",
+            "hostairtel/main-image9.png",
+            "hostairtel/main-image8.jpg"
+        ],
         "description": "Enjoy seamless browsing, streaming, and downloading with Airtel's 3-Months Data Bundle. Get 350.0GB of data valid for 120 days at an unbeatable price of ₦60,000. Stay connected with Airtel's reliable network and experience high-speed internet like never before. Whether you're working, studying, or entertaining yourself online, this data bundle has got you covered for three whole months. Don't miss out on this fantastic offer – recharge now and stay connected with Airtel!",
         "productLink": "https://airtel.com.ng/prepaid-recharge",
         "usage": "Primary: Internet browsing, streaming, downloading. Common: Remote work, online learning, social media. Essential: Staying connected for communication and entertainment.",
