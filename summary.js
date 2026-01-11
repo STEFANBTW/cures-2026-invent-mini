@@ -73,15 +73,14 @@ function renderSummary(items) {
 
         // Slider Generation - use thumbnail images for faster load times
         const imagesList = item.images && item.images.length > 0 ? item.images : ["https://placehold.co/300x200?text=No+Img"];
-        const thumbnailImagesList = imagesList.map(src => {
-            // Convert original image path to thumbnail version
+        const sliderHTML = imagesList.map(src => {
+            let thumbSrc = src;
             const lastDot = src.lastIndexOf('.');
             if (lastDot !== -1) {
-                return src.substring(0, lastDot) + '_thumb' + src.substring(lastDot);
+                thumbSrc = src.substring(0, lastDot) + '_thumb' + src.substring(lastDot);
             }
-            return src;
-        });
-        const sliderHTML = thumbnailImagesList.map(src => `<img loading="lazy" decoding="async" src="${src}" alt="${item.name}">`).join('');
+            return `<img loading="lazy" decoding="async" src="${thumbSrc}" alt="${item.name}" onerror="this.onerror=function(){this.src='https://placehold.co/300x200?text=No+Image'}; this.src='${src}'">`;
+        }).join('');
 
         const cardWrapper = document.createElement('div');
         cardWrapper.className = 'summary-card-wrapper';

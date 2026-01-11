@@ -13,7 +13,10 @@ import sys
 THUMBNAIL_SIZE = (300, 300)  # Thumbnail dimensions
 THUMBNAIL_QUALITY = 85  # JPEG quality (1-95)
 SOURCE_DIRS = [
-    'hostairtel'
+    'hostairtel',
+    'images',
+    'product_images',
+    'AliExpress_Downloads'
 ]
 
 SUPPORTED_FORMATS = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'}
