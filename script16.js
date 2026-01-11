@@ -285,7 +285,7 @@ function renderProspects() {
                 if (lastDot !== -1) {
                     thumbSrc = src.substring(0, lastDot) + '_thumb' + src.substring(lastDot);
                 }
-                return `<img loading="lazy" decoding="async" src="${thumbSrc}" alt="${item.name}" onerror="this.onerror=function(){this.src='https://placehold.co/300x200?text=No+Image'}; this.src='${src}'">`;
+                return `<img loading="lazy" decoding="async" src="${thumbSrc}" alt="${item.name}" onerror="this.onerror=null; this.src='${src}'">`;
             }).join('');
 
             card.innerHTML = `
@@ -367,7 +367,10 @@ function handleCardClick(e) {
     const specsList = Array.isArray(item.brief) ? item.brief : (item.brief ? item.brief.split('\n') : []);
     const specsHTML = specsList.length > 0 ? specsList.map(s => `<li>${s}</li>`).join('') : '<li>N/A</li>';
     // Always use full-size images in the detail panel
-    const panelSliderHTML = (item.images || []).map(src => `<img loading="lazy" decoding="async" src="${src}" alt="${item.name}">`).join('');
+    const panelSliderHTML = (item.images || []).map(src => {
+        const fullSrc = src.replace(/_thumb(\.[^.]+)$/, '$1');
+        return `<img class="panel-full-img" loading="lazy" decoding="async" src="${fullSrc}" alt="${item.name}">`;
+    }).join('');
     const shippingText = parsePrice(item.shipping) > 0 ? `+${getFormattedPrice(parsePrice(item.shipping))} shipping` : 'Free shipping';
     
     let badgeHtml = '';

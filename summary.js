@@ -79,7 +79,7 @@ function renderSummary(items) {
             if (lastDot !== -1) {
                 thumbSrc = src.substring(0, lastDot) + '_thumb' + src.substring(lastDot);
             }
-            return `<img loading="lazy" decoding="async" src="${thumbSrc}" alt="${item.name}" onerror="this.onerror=function(){this.src='https://placehold.co/300x200?text=No+Image'}; this.src='${src}'">`;
+            return `<img loading="lazy" decoding="async" src="${thumbSrc}" alt="${item.name}" onerror="this.onerror=null; this.src='${src}'">`;
         }).join('');
 
         const cardWrapper = document.createElement('div');

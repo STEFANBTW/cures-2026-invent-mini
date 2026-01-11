@@ -917,6 +917,11 @@ body.large-font {
     transform: scale(1.5);
 }
 
+.tool-bag-tdescr .slider-track img.panel-full-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+}
+
 .panel-details h3 {
     color: var(--color-orange-action);
     margin-top: 20px;
@@ -1000,6 +1005,7 @@ body.large-font {
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     background-color: var(--essential-bg);
+    color: var(--essential-red);
 }
 
 .slider-controls {
@@ -1096,8 +1102,8 @@ body.large-font {
 }
 
 .panel-rank-label {
-    background-color: var(--essential-bg);
-    color: var(--essential-red);
+    background-color: var(--color-alice-blue);
+    color: var(--color-brown-darkest);
     padding: 4px 8px;
     border-radius: 4px;
     font-weight: bold;
@@ -2366,6 +2372,12 @@ body.large-font {
     .summary-header h1 {
         font-size: calc(29px * var(--font-scale, 1));
     }
+
+    .product-grid {
+        gap: 10px;
+        margin: 10px;
+        position: relative;
+    }
     
     /* Hide hamburger on desktop explicitly if needed, but media query handles it */
     /* Above 1200px styles are default, so we need to ensure hamburger is hidden there */
@@ -2672,6 +2684,15 @@ body.large-font {
         border-radius: 4px;
         pointer-events: auto;
         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .panel-meta-row .essential-badge {
+        font-size: calc(12px * var(--font-scale, 1)); /* Increased font size */
+        padding: 6px 10px;
+        pointer-events: auto;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        background-color: var(--essential-bg);
     }
     /* --- Mobile Specific Filter Logic (<= 740px) --- */
     .filter-hamburger-btn::after {
